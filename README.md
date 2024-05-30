@@ -2,6 +2,12 @@
 
 &ensp;&ensp;**GNC** is a metakernel for orchestrating networked computing resources in a manner that is transparent to the user. It expands the traditional operating system concepts such as task scheduling, memory management, file system and synchronization over the entire local- or wide- area networks, and abstracts the underlying details of the computing infrastructure away.
 
+## TODO
+### Fill in the readme
+For each subtopic, a 1000-word paragraph must be written to describe (1) what is the stuff, (2) who did it under for what scenario, (3) common advantages and shortcomings of the system, and (4) what fundamental design decision made the system exhibit its characteristics.
+
+### Fill in the Document/Reference: each reference part needs to be expanded to a paper. If you have less than 1000 references for each part when you finish it, you're probably off by pretty far. When doing the survey, it needs to be written as if you were to build a new system; you need to mention (1) what the paper did, (2) what influence it had, (3) today who's using the technique or why is the technique abandoned, and (4) what kind of design decisions we should make when we build the system. Feel free to change the latex templates provided, and each part can supply your own styles/bib as needed. We clean up later on.
+
 ## Quick Demo
 
 
