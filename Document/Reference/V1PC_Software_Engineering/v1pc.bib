@@ -1,0 +1,156 @@
+@Misc{nccl2016,
+howpublished = {\url{https://developer.nvidia.com/blog/fast-multi-gpu-collectives-nccl/}},
+note = {Apr 07, 2016},
+title = {Fast Multi-GPU collectives with NCCL},
+author = {Nathan Luehr}
+}
+
+@Misc{mpiforum,
+howpublished = {\url{https://www.mpi-forum.org/}},
+title = {MPI Forum},
+}
+
+@article{cpe4667,
+author = {Faraji, Iman and Afsahi, Ahmad},
+title = {Design considerations for GPU-aware collective communications in MPI},
+journal = {Concurrency and Computation: Practice and Experience},
+volume = {30},
+number = {17},
+pages = {e4667},
+keywords = {collectives, GPU, hierarchical framework, inter-process communications, MPI, MPS},
+doi = {https://doi.org/10.1002/cpe.4667},
+url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/cpe.4667},
+eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/cpe.4667},
+note = {e4667 cpe.4667},
+abstract = {Summary GPU accelerators have established themselves in the state-of-the-art clusters by offering high performance and energy efficiency. In such systems, efficient inter-process GPU communication is of paramount importance to application performance. This paper investigates various algorithms in conjunction with the latest GPU features to improve GPU collective operations. First, we propose a GPU Shared Buffer-aware (GSB) algorithm and a Binomial Tree Based (BTB) algorithm for GPU collectives on single-GPU nodes. We then propose a hierarchical framework for clusters with multi-GPU nodes. By studying various combinations of algorithms, we highlight the importance of choosing the right algorithm within each level. The evaluation of our framework on MPI\_Allreduce shows promising performance results for large message sizes. To address the shortcoming for small and medium messages, we present the benefit of using the Hyper-Q feature and the MPS service in jointly using CUDA IPC and host-staged copy types to perform multiple inter-process communications. However, we argue that efficient designs are still required to further harness this potential. Accordingly, we propose a static and a dynamic algorithm for MPI\_Allgather and MPI\_Allreduce and present their effectiveness on various message sizes. Our profiling results indicate that the achieved performance is mainly rooted in overlapping different copy types.},
+year = {2018}
+}
+
+@inproceedings{awan2016,
+author = {Awan, A. A. and Hamidouche, K. and Venkatesh, A. and Panda, D. K.},
+title = {Efficient Large Message Broadcast using NCCL and CUDA-Aware MPI for Deep Learning},
+year = {2016},
+isbn = {9781450342346},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2966884.2966912},
+doi = {10.1145/2966884.2966912},
+abstract = {Emerging paradigms like High Performance Data Analytics (HPDA) and Deep Learning (DL) pose at least two new design challenges for existing MPI runtimes. First, these paradigms require an efficient support for communicating unusually large messages across processes. And second, the communication buffers used by HPDA applications and DL frameworks generally reside on a GPU's memory. In this context, we observe that conventional MPI runtimes have been optimized over decades to achieve lowest possible communication latency for relatively smaller message sizes (up-to 1 Megabyte) and that too for CPU memory buffers. With the advent of CUDA-Aware MPI runtimes, a lot of research has been conducted to improve performance of GPU buffer based communication. However, little exists in current state of the art that deals with very large message communication of GPU buffers. In this paper, we investigate these new challenges by analyzing the performance bottlenecks in existing CUDA-Aware MPI runtimes like MVAPICH2-GDR, and propose hierarchical collective designs to improve communication latency of the MPI_Bcast primitive by exploiting a new communication library called NCCL. To the best of our knowledge, this is the first work that addresses these new requirements where GPU buffers are used for communication with message sizes surpassing hundreds of megabytes. We highlight the design challenges for our work along with the details of design and implementation. In addition, we provide a comprehensive performance evaluation using a Micro-benchmark and a CUDA-Aware adaptation of Microsoft CNTK DL framework. We report up to 47\% improvement in training time for CNTK using the proposed hierarchical MPI_Bcast design.},
+booktitle = {Proceedings of the 23rd European MPI Users' Group Meeting},
+pages = {15–22},
+numpages = {8},
+location = {Edinburgh, United Kingdom},
+series = {EuroMPI '16}
+}
+
+@inproceedings{shah2023taccl,
+  title={$\{$TACCL$\}$: Guiding Collective Algorithm Synthesis using Communication Sketches},
+  author={Shah, Aashaka and Chidambaram, Vijay and Cowan, Meghan and Maleki, Saeed and Musuvathi, Madan and Mytkowicz, Todd and Nelson, Jacob and Saarikivi, Olli and Singh, Rachee},
+  booktitle={20th USENIX Symposium on Networked Systems Design and Implementation (NSDI 23)},
+  pages={593--612},
+  year={2023}
+}
+
+@inproceedings{cowan2023mscclang,
+  title={Mscclang: Microsoft collective communication language},
+  author={Cowan, Meghan and Maleki, Saeed and Musuvathi, Madanlal and Saarikivi, Olli and Xiong, Yifan},
+  booktitle={Proceedings of the 28th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2},
+  pages={502--514},
+  year={2023}
+}
+
+@article{birrell1984implementing,
+  title={Implementing remote procedure calls},
+  author={Birrell, Andrew D and Nelson, Bruce Jay},
+  journal={ACM Transactions on Computer Systems (TOCS)},
+  volume={2},
+  number={1},
+  pages={39--59},
+  year={1984},
+  publisher={ACM New York, NY, USA}
+}
+
+@book{fielding2000architectural,
+  title={Architectural styles and the design of network-based software architectures},
+  author={Fielding, Roy Thomas},
+  year={2000},
+  publisher={University of California, Irvine}
+}
+
+@article{lamport1982byzantine,
+author = {Lamport, Leslie and Shostak, Robert and Pease, Marshall},
+title = {The Byzantine Generals Problem},
+year = {1982},
+issue_date = {July 1982},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {4},
+number = {3},
+issn = {0164-0925},
+url = {https://doi.org/10.1145/357172.357176},
+doi = {10.1145/357172.357176},
+journal = {ACM Trans. Program. Lang. Syst.},
+month = {jul},
+pages = {382–401},
+numpages = {20}
+}
+
+@article{castro2002practical,
+  title={Practical byzantine fault tolerance and proactive recovery},
+  author={Castro, Miguel and Liskov, Barbara},
+  journal={ACM Transactions on Computer Systems (TOCS)},
+  volume={20},
+  number={4},
+  pages={398--461},
+  year={2002},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{gilad2017algorand,
+  title={Algorand: Scaling byzantine agreements for cryptocurrencies},
+  author={Gilad, Yossi and Hemo, Rotem and Micali, Silvio and Vlachos, Georgios and Zeldovich, Nickolai},
+  booktitle={Proceedings of the 26th symposium on operating systems principles},
+  pages={51--68},
+  year={2017}
+}
+
+@inproceedings{pass2017sleepy,
+  title={The sleepy model of consensus},
+  author={Pass, Rafael and Shi, Elaine},
+  booktitle={Advances in Cryptology--ASIACRYPT 2017: 23rd International Conference on the Theory and Applications of Cryptology and Information Security, Hong Kong, China, December 3-7, 2017, Proceedings, Part II 23},
+  pages={380--409},
+  year={2017},
+  organization={Springer}
+}
+
+@inproceedings{yin2019hotstuff,
+  title={HotStuff: BFT consensus with linearity and responsiveness},
+  author={Yin, Maofan and Malkhi, Dahlia and Reiter, Michael K and Gueta, Guy Golan and Abraham, Ittai},
+  booktitle={Proceedings of the 2019 ACM Symposium on Principles of Distributed Computing},
+  pages={347--356},
+  year={2019}
+}
+
+@inproceedings{miller2016honey,
+  title={The honey badger of BFT protocols},
+  author={Miller, Andrew and Xia, Yu and Croman, Kyle and Shi, Elaine and Song, Dawn},
+  booktitle={Proceedings of the 2016 ACM SIGSAC conference on computer and communications security},
+  pages={31--42},
+  year={2016}
+}
+
+@article{nakamoto2008bitcoin,
+  title={Bitcoin: A peer-to-peer electronic cash system},
+  author={Nakamoto, Satoshi},
+  year={2008}
+}
+
+@article{wang2019survey,
+  title={A survey on consensus mechanisms and mining strategy management in blockchain networks},
+  author={Wang, Wenbo and Hoang, Dinh Thai and Hu, Peizhao and Xiong, Zehui and Niyato, Dusit and Wang, Ping and Wen, Yonggang and Kim, Dong In},
+  journal={Ieee Access},
+  volume={7},
+  pages={22328--22370},
+  year={2019},
+  publisher={IEEE}
+}
