@@ -39,7 +39,18 @@ __The heritage of the past is the seed that brings forth the harvest of the futu
 
 ### Software engineering
 - NCCL etc. libraries
-- CORBA infrastructure
+- CORBA-TAO/DCOM/SOAP/ICERPC infrastructure
+  - CORBA even have real-time and mission-critical extensions.
+  - Why did CORBA fail (or is unpopular now)?
+    - Possibly due to growth of computation/communication power ratio, which will grow further in the future, as the speed of light is a basic limitation.
+    - Serializing and deserializing time is negligible now, and REST seems ok because latency is the limitation here, not bandwidth; speed of light again here.
+  - We should possibly base our ground abstraction upon a full message-passing model, but the implementation should vary.
+    - How should we pass the messages, in a pubsub model, or a sndrcv notification model?
+    - Variables are better in a pubsub model and the OS underlying could always optimize for that. Pubsub exposes causality in a better way as it provides a handle to group the receivers.
+    - Notifications, blockings, are instead better to go through the sndrcv model. They are one-to-one in nature though you can make them pubsub as well.
+      - Possibly have your APP/GROUPNAME or something else, and pubsub.
+  - Other abstractions can __ALL__ drop upon message-passing, even shared memory. So we have forward compatibilities as well.
+  - Language neutrality will be there, or not? It seems we need to have them, but some languages are just ill-suited to building such APPs.
 - Blockchain/BFT protocols
 
 ## Commercial and engineering efforts
