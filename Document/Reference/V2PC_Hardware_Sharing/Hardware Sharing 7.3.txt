@@ -1,0 +1,101 @@
+Hardware Sharing
+Generic virtualization
+Generic virtualization是一种广泛应用与计算资源管理的技术，通过创建计算机资源的虚拟版本，来提高资源利用效率、灵活性和可管理性。这项技术使不同的虚拟资源可以在同一个物理硬件上运行，从而实现资源共享、隔离和动态分配。
+按应用场景进行分类：
+1.服务器虚拟化：在一台物理服务器上运行多个虚拟机，常用于数据中心和云计算环境
+例子：VMware ESXi、Microsoft Hyper-V、KVM
+2.桌面虚拟化：将桌面环境虚拟化，使用户可以远程访问虚拟桌面
+例子：VMware Horizon、Citrix Virtual Apps and Desktops
+3.存储虚拟化：将物理存储资源抽象为虚拟存储池，以提高存储资源的利用率和管理效率。
+例子：IBM Spectrum Virtualize、VMware vSAN
+4.网络虚拟化：抽象网络资源，实现灵活的网络配置和管理
+例子：VMware NSX、Cisco ACI
+Generic virtualization应用场景：
+主要包括企业级应用、云计算服务、大数据处理、人工智能等领域。随着企业数字化转型的加速，虚拟化技术的市场需求不断增长。
+目前主流虚拟化厂商：https://blog.51cto.com/alistine/1712793
+1.Vmware：
+虚拟化技术的领头羊，将虚拟化技术带到了X86平台，为云计算发展起到了催化剂作用，虚拟化建立在文件层面上。产品线主要是服务器虚拟化（vSphere 5）和桌面虚拟化（View），应用虚拟化（Thinapp，很不成熟）。
+产品介绍：
+vmware workstation：使多个虚拟机在同一个宿主机中运行
+https://zh.wikipedia.org/wiki/VMware_Workstation
+ VMware Workstation是VMware公司销售的运行于台式机和工作站上的虚拟化软件，也是VMware公司第一个面市的产品（1999年5月）。该产品最早采用了VMware在业界知名的二进制翻译技术，在x86 CPU硬件虚拟化技术还未出现之前，为客户提供了纯粹的基于软件的全虚拟化解决方案。
+https://blog.csdn.net/weixin_56416078/article/details/124163609
+桌面虚拟化软件，适用于个人用户、开发人员和测试人员；支持多种主流操作系统，支持跨平台；在将MAC地址用作唯一识别标记的环境中时需为每个虚拟机手工配置MAC地址；
+https://www.utheme.cn/code/31297.html
+Vmware esxi：企业级类型 I（type-1）Hypervisor，用于硬件虚拟化
+它是专为运行虚拟机、最大限度降低配置要求和简化部署而设计；通过直接访问并控制底层资源，ESXi能有效地对硬件进行分区，以便整合应用并降低成本。
+https://zh.wikipedia.org/wiki/VMware_ESXi
+https://blog.csdn.net/weixin_45311714/article/details/126773334
+VMware Horizon：是一种虚拟桌面基础结构（VDI）产品，可为最终用户提供虚拟桌面和已发布的应用程序。
+https://www.azurew.com/vmware/horizon-7/3647.html
+VMware vSAN：一款软件定义的企业存储解决方案，支持超融合基础架构（HCL）系统；基于服务器端存储的共享分布式对象存储系统，可取代vSphere（用于构建云计算基础的虚拟化平台）后端的外置磁盘阵列
+http://njlanhome.com/solve/537.html
+2.Microsoft
+Microsoft虚拟化是多元的虚拟化，最大的优势在于与操作系统紧密结合，其虚拟化是直接访问硬件，建立在硬件层面的虚拟化，主要覆盖了服务器虚拟化（Hyper-V）、桌面虚拟化（RDS,MDOP)、表现层虚拟化和应用虚拟化（App-V）四个方面，相对而言服务器虚拟化优势最大。
+产品介绍：
+服务器虚拟化包括Hyper-V、Hyper-V server2012，virtual server
+桌面虚拟化：virtual PC
+应用虚拟化：收购的softGrid Application Virtualization
+Microsoft Hyper-V：在服务器虚拟化和大规模数据中心环境中表现突出；适用于大型企业和云计算平台；设计的目的是为广泛的用户提供更为熟悉及成本效益更高的虚拟化基础设施软件，这样可以降低运作成本、提高硬件利用率、优化基础设施并提高服务器的可用性。  Hyper-V的设计借鉴了Xen，采用微内核的架构，兼顾了安全性和性能的要求。
+https://www.utheme.cn/code/31297.html
+3.Citrix
+Citrix得益于云计算的兴起，增长非常快。使用操作系统的虚拟化技术，且同微软在很多方面都有合作。
+产品介绍：
+服务器虚拟化：XenServer	便宜，管理一般，是经过云验证的企业级虚拟化产品
+应用虚拟化：XennAPP
+桌面虚拟化：Xendesktop
+VMware在虚拟化技术领域拥有深厚的技术积累和广泛的市场认可度；Microsoft则凭借其操作系统的优势，在桌面虚拟化市场占据一定份额；Citrix则以远程桌面协议（RDP）为基础，提供高效的远程桌面解决方案。
+https://developer.baidu.com/article/details/3111924
+Cloud gaming providers
+云游戏提供商则是指专门提供基于云计算技术的游戏服务的公司或平台。云游戏提供商通过利用云计算技术，为用户提供了一种灵活、便捷且跨设备的游戏体验方式，用户可以通过互联网玩游戏，而无需高端的游戏硬件。游戏不是在个人电脑或游戏机上本地运行，而是在远程服务器上执行，并流式传输到用户设备。
+主要云游戏提供商：
+1.NVIDIA GeForce Now：允许用户从Steam、Epic Games Store等平台流式传输他们现有的游戏库；全球数据中心，使用高性能NVIDIA GPU；采用低延迟网络连接，使用边缘计算技术；使用H.265视频编码标准；自适应比特率；
+2.Boosteroid：一个欧洲的云游戏服务，支持各种游戏，允许用户在各种设备上玩这些游戏
+3.Microsoft Xbox Cloud Gaming（前称Project xCloud）：作为Xbox Game Pass Ultimate的一部分，使用户能够将大量Xbox游戏流式传输到各种设备上；基于微软的Azure云服务，拥有全球数据中心；采用高带宽低延迟网络，并结合边缘计算技术；使用H.265和自适应比特率技术。
+GPU virtualization
+1.GPU virtualization允许多个虚拟机(VM)或容器共享一块物理图形处理单元（GPU）。其主要目标是提高资源利用率和灵活性，同时保持性能。它使得不同的虚拟机或容器能够通过软件隔离和管理，共享同一块GPU，而不会相互干扰或导致冲突。该技术在提升数据中心效率、降低成本、增强安全性和灵活性方面具有显著的优势，是云计算和企业IT基础设施中不可或缺的一部分。
+目前流行的商用GPU virtualization方案可以分为：
+https://developer.aliyun.com/article/599189
+1.GPU 直通模式：
+最早采用最成熟；Nvidia Tesla、AMD FirePro、Intel Gen8/Gen9都有支持；
+相对于任何其他设备来说，有额外的PCL配置空间模拟和MMIO的拦截；依赖IOMMU;
+直通模式是对比物理机性能损耗最小，硬件驱动无需修改的方案，被各大公用云厂商广泛采用。对于支持直通的GPU而言，直通模式没有对可支持的GPU数量做限制，也没有对GPU功能性做阉割。GPU厂家的绝大多数新功能可以在直通模式下无修改地支持。
+性能损耗最小；功能兼容性好；技术简单，运维成本低，对GPU厂商没有依赖；
+不支持热迁移（GPU硬件研发属于厂家核心竞争力，实现热迁移需要GPU硬件厂商协助）；不支持GPU资源分割；监控缺失（虚拟机直接访问GPU硬件，宿主机上只有一个Pseudo PCL驱动，无法拿到有效信息）；
+2.GPU SRIOV模式：
+AMD S7150, AMD M125；
+SRIOV的本质是把一个PCI卡资源（PF）拆分成多个小份（VF），这些VF依然是符合PCI规范的endpoint设备。由于VF都带有自己的Bus/Slot/Function号，IOMMU/VTD在收到这些VF的DMA请求的过程中可以顺利查找IOMMU2ndTranslation Table从而实现GPA到HPA的地址转换；VF调度采用分时复用；
+安全性上SRIOV>半虚拟化（SRIOV多了一层IOMMU地址访问保护）；
+在Scalable（可扩展性）方面没有优势；
+3.GPU 分片虚拟化（mediated passthrough）：
+Intel GVT-g和Nvidia GRID vGPU；
+分片：对GPU在时间片段上划分；对GPU资源划分；
+基于VFIO mediated passthrough framework的GPU虚拟化方案。该方案由NVIDIA提出，并联合Intel一起提交到了Linux kernel 4.10代码库，该方案的kernel部分代码简称mdev模块；
+把会影响性能的访问直接passthrough给虚拟机，把性能无关，功能性的MMIO访问做拦截并在mdev模块内做模拟；不依赖IOMMU；在宿主机端实现地址转换和安全检查；
+GVT-g：基于Intel的集成显卡，所以对运行环境的硬件要求非常低；完全免费；广泛应用于XenClient，ARCN等；对本地显式良好支持；对media decoding/encoding支持；但本身GPU性能无法与AMD/NVIDIA同类产品竞争；基于集成显卡，无法做到一机多卡，无法实现高密度运用；
+4.GPU全虚拟化：
+VMWare的vSGA；
+vSGA可以用安装在ESXi主机上的物理显卡（或者称为GPU）为多个虚拟机提供硬件图形加速。
+允许在多个虚拟机共享主机上的GPU显卡；安装简单；支持vMotion；
+可能需要重新认证应用程序才能受支持（因为虚拟机上显示出来的显卡类型不是nVidia的）；API支持受到限制；OpenGL和DirectX版本的支持受到限制；每个虚拟机最多能分配512M显存；
+https://blog.csdn.net/petrosofts/article/details/110129676
+5.Virtio GPU：
+尚未成熟
+Netcafe diskless environments
+Netcafe diskless environments指网咖无盘环境，客户端计算机通常不具备本地硬盘，而是通过网络从服务器上获取操作系统和应用程序。数据通过光纤通道进行传输，速度更快，可以提高网吧的运行效率；所有数据和软件更新都由中央管理，可以显著降低维护成本，提高安全性，并且易于管理。
+目前国内较为常见的商业无盘品牌：
+锐起、网众、MZD/PXD、奇东锐腾、VND协志、DOL、EZDisk等
+
+从上表可以看出，三者的市场定位和覆盖地区还是有很大差异的，而且都有自己的独有的市场特点。
+1.网众NXD价格适中，但是技术服务上受linux需要专业技术员维护的限制，影响整体服务体系和质量。
+2.锐起XP是知名度较高的无盘软件，但是最大的问题是盗版猖獗，严重影响了市场秩序，目前主要是小型网吧使用盗版锐起居多，根本谈不上售后服务。
+3.斯普林MZD无盘价格较贵，市场定位主要是针对160台以上的大中型网吧，并且有自己关联的度身定制的服务器、交换机、防火墙、工作站、网管软件，纯千兆方案成熟稳定，属于无盘界中的高档产品，适合有经济实力大中型网吧和连锁网吧。
+https://m.5636.com/netbar/article/arc/4262
+Transcendental memory
+超验记忆是Linux 内核的一个特性，代表一类内存，它的大小未知且动态可变，只能由内核间接寻址，可以配置为持久性或“短暂性”（意味着它会存在一段时间，但可能会毫无预警地消失），并且仍然足够快，可以同步访问。
+Memory balloons
+Memory balloons（内存气球）是一种在虚拟化环境中用于管理和优化内存资源分配的技术。它通过在虚拟机（VM）和宿主机之间动态调整内存分配，以优化整体性能和资源利用率。具体来说，内存气球技术允许宿主机从虚拟机中“充气”或“放气”，即根据需要将内存分配给虚拟机或从虚拟机中释放内存，以便将资源重新分配给其他虚拟机或宿主系统。内存气球位于虚拟机中，内存气球 “膨胀” 则是虚拟机将内存释放给宿主机，内存气球 “压缩” 则是宿主机将内存还给虚拟机。
+由于物理和虚拟资产都需要内存资源，因此需要以多种方式声明、释放和回收内存。内存气球是为了使虚拟机内存能够扩展的技术，从而可使系统在需要时为特定虚拟机提供更多内存。内存气球在虚拟化管理程序中工作，常用于虚拟化平台：VMware ESXi、Microsoft Hyper-V和KVM（开源）
+优点：资源优化；提高内存可用性；降低成本，不需部署更多物理服务器或分配更多物理内存
+缺点：气球驱动程序可能占用太多内存，以至于管理程序缺乏在性能最佳时运行所需全部资源；多个虚拟机同时请求气球内存，可能降低系统整体性能；内存过度碎片化；
+https://m.elecfans.com/article/1115488.html
