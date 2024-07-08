@@ -92,8 +92,10 @@ __The engineer has been, and is, a maker of history. -- James Kip Finch__
 - Fluence network
 
 ### Physical Layer
-- RDMA/RoCE/Infiniband
+- RDMA/RoCE
 - CXL/PCIe
+- Infiniband
+- OmniPath (and how it died; see also ScaleMP vSMP solutions for fault tolerance)
 
 ## Standing on the Shoulders of the Giants
 <div align="center">
