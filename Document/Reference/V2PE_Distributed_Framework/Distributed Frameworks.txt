@@ -1,0 +1,88 @@
+Distributed Frameworks
+       --Sun Grid Engine
+       SGE（Sun Grid Engine）是一种开源的集群管理软件，用于管理和调度计算集群中的任务。其主要目标是提供高性能计算环境，使用户能够有效地利用集群资源。具体工作为将用户投递的任务进行排队，然后将任务交给能够运行的计算节点执行。
+       它最初由Sun Microsystems开发，后来由Oracle继续开发和支持，将其改名为OGE(Oracle Gride Engine），并取消开源成为收费项目。SGE社区为挽救SGE项目，分别成立了Son of Gride Engine和Open Gride Scheduler项目，继续开源和独立发展；
+       目前，Open Gride Scheduler得到Oracle支持继续开源，但技术支持服务收费，Son of Gride Engine完全遵循GPL协定，开源且免费，但因未得到Oracle支持且缺乏原SGE核心工程师而被持疑。
+       优势：
+       1.可以在多种环境中运行：大型计算机集群、网络和云环境；
+       2.可自动执行任务，并在计算机资源可用时自动分配任务；
+       3.可与其他工具（如HTCondor）集成，提高计算能力；
+       缺点：
+       使用CA证书验证，复杂不易使用；
+       定义主机列表方面操作也较为复杂；
+       由Oracle收购后取消开源成为收费项目；
+https://www.cnblogs.com/bio-mary/p/13225149.html
+https://blog.51cto.com/frankie9/510519
+https://cloud.tencent.com/developer/information/Condor%2CSun%20Grid%20Engine%2C%E8%BF%98%E6%98%AF%E5%85%B6%E4%BB%96%E4%BB%80%E4%B9%88%EF%BC%9F-salon
+https://blog.51cto.com/ittony/1562771
+       --MapReduce framework
+       MapReduce是一种用于处理和生成大规模数据集的编程模型。2004年由谷歌提出，现已成为处理大规模数据（大于1TB)的标准方法之一.其主要思想是Map和Reduce，极大地方便了编程人员在不会分布式并行编程时将自己程序运行在分布式系统上。
+       MapReduce计算模型构成：
+       主要由三个阶段构成：Map、Shuffle、Reduce；
+       Map是映射，负责数据的处理、分发，将原始数据转化为键值对；Reduce是合并，将具有相同key值的value进行处理后再输出新的键值对作为最终结果。为了让Reduce可以并行处理Map的结果，必须对Map的输出进行一定的排序与分割，然后再交给对应的Reduce，而这个将Map输出进一步整理并交给Reduce的过程就是Shuffle。
+       其中，Shuffle是系统自动实现的，而Map和Reduce操作需要自己定义相应Mapper类和Reducer类，以完成所需要的化简、合并操作。
+       优点：
+       1.能够处理 PB 以上级别的数据；
+       2.自动处理节点故障，具有很高的容错性；
+       3.易于编程，MapReduce向用户提供了简单的编程接口，隐藏了分布式计算的复杂性，用户只需编写 map 和 reduce 函数；
+       4.可以通过简单增加机器来扩展其计算能力，具有良好扩展性；
+       缺点：
+       1.适合批处理任务，不擅长实时计算；
+       2.MapReduce自身设计特点决定了数据源必须是静态的，因此不擅长流式计算；
+       3.不擅长DAG（有向无环图）计算，会造成大量磁盘IO，降低性能；
+       4.MapReduce 的编程模型相对简单，但对于某些复杂的数据处理任务可能不够灵活；
+       5.MapReduce 的调度开销较大，可能会影响性能；
+https://blog.csdn.net/qq_45038038/article/details/135302553
+https://blog.csdn.net/lubin2016/article/details/125223582
+       对于MapReduce架构，主要实现有：
+       1.Hadoop MapReduce：最著名的开源实现，由 Apache 软件基金会维护；
+       2.Google MapReduce：最早由谷歌提出，并在内部使用；
+       3.Amazon EMR（Elastic MapReduce）：Amazon 提供的基于云的 MapReduce 服务；
+       4.Apache Spark：虽然主要是一个内存计算框架，但也实现了兼容 MapReduce 的编程模型，并提供了更高的性能；
+       --Reverse Proxies
+       反向代理是指以代理服务器来接收客户端的请求，然后将请求转发给内部网络上的服务器，将从服务器上得到的结果返回给客户端，此时代理服务器对外表现为一个反向代理服务器。
+       对于客户端来说，反向代理相当于目标服务器，只需将反向代理当作目标服务器一样发送请求即可，客户端无需进行任何设置。反向代理是代理服务器，为服务器收发请求，使真实服务器对客户端不可见。
+       优点：
+       1.可对客户端隐藏服务器的ip地址，提供一定的安全保护；
+       2.为后端多台服务器提供负载均衡；
+       3.可以对静态内容及短时间内有大量访问请求的动态内容提供缓冲服务，提高访问速度；
+       4.可作为应用层的防火墙，为网站提供基于web攻击行为的防护，更容易排查恶意软件等，提供安全保障；
+       5.为后端服务器统一提供加密和SSL加速，提供HTTP访问认证；
+       缺点：
+       1.需要配置每个客户端的代理设置；
+       2.增加网络延迟；
+       3.某些应用程序可能需要进行特殊配置以适应反向代理的使用。
+       反向代理应用：
+       （1）squid
+       很古老的反向代理软件，拥有传统代理、身份验证、流量管理等高级功能，它算是目前互联网应用得最多的反向缓存代理服务器。
+       优点：
+       1.完整的庞大的cache技术资料；
+       2.很多的应用生产环境；
+       缺点：
+       1.配置复杂；
+       2.主要工作于各大古老的cdn上；
+      （2）Varnish
+       高性能、开源的反向代理服务器和内存缓存服务器，主要应用在并发要求不是很大的小型系统和应用中。
+       优点：
+       1. 高性能；
+       2. 多核支持；
+       3. 支持0-60秒的精确缓存时间。
+       缺点：
+       1. 不具备自动容错和恢复功能，重启后数据丢失；
+       2. 在线扩容比较难。
+       3. 32位机器上缓存文件大小为最大2GB；
+       4. 不支持集群。
+       （3）nginx
+       高性能的HTTP和反向代理服务器，广泛应用于Web服务、负载均衡、缓存等场景。
+       优点：
+       1.对网络稳定性依赖非常小，安装与配置非常简单；
+       2.可承担高负载且稳定；
+       3.可通过端口检测服务器内部故障；
+       4.社区活跃，第三方模块非常多；
+       缺点：
+       1.应用范围较小，仅能支持http、https、Email协议；
+       2、对后端服务器的健康检查，只支持通过端口检测，不支持url来检测；
+https://cloud.tencent.com/developer/article/1996633
+https://blog.csdn.net/yyh_linux_note/article/details/97112496
+https://blog.csdn.net/weixin_43809223/article/details/100827275?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-100827275-blog-104900016.235^v43^pc_blog_bottom_relevance_base6&spm=1001.2101.3001.4242.1&utm_relevant_index=3
+
