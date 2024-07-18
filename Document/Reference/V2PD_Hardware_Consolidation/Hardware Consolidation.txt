@@ -2,9 +2,16 @@ Hardware Consolidation
        --ScaleMP vSMP consolidation solutions
        ScaleMP vSMP（Virtual Symmetric Multiprocessing）是一种硬件整合（Hardware Consolidation）解决方案，专注于通过软件定义的方法将多个物理服务器的处理器和内存资源虚拟化，形成一个单一的虚拟机器，将多个服务器的内存资源合并为一个共享的内存空间，形成一个大型的虚拟对称多处理系统（SMP）。
        ScaleMP的vSMP Foundation聚合平台能够创建高端的基于x86的对称多处理器(SMP)系统，以比传统SMP低得多的价格提供卓越的性能，与托管x86集群相当。基于vSMP Foundation的解决方案保留了传统SMP操作模型的优点(易于安装和管理以及大内存)，同时利用了广泛的基于x86的应用程序组合。
+       对于ScaleMP vSMP，以太网是不可能支持的，带宽相对太低。Infiniband支持（Infiniband支持CPU热插拔，实现高带宽低延迟的交换，由于性能实在太高，不可能形成一个大集群），OmniPath则是在Infiniband上的优化，把网络接口直接装在CPU上，跳过了访问控制层，带宽比Infiniband高、延迟比Infiniband低，成本比Infiniband低，是第一种真正实现了把CPU直接连起来的机制；但对于分布式系统，出错的概率很大，接口越多掉线概率越大，系统不可能提供任何容错，因此可靠性非常低，因此最终失败。对于真正的大型主机，则通过准备多个内存插槽来确保大型系统的可靠性。
+       Evaluation of SMP Shared Memory Machines for Use with In-Memory and OpenMP Big Data Applications
+       A.J. Younge, C. Reidy, R. Henschel and G. C. Fox
+       2016 IEEE International Parallel and Distributed Processing Symposium Workshops (IPDPSW)
+vSMP平台将许多商用x86系统（如经典集群）聚合到单个虚拟化系统中，从用户和管理角度来看，只存在一个大型系统，其中部署了修不过的Linux操作系统，通常是RedHat Linux。有了足够的底层硬件，这个系统可以合并128个节点，扩展到1024个处理器和2PB的内存，全部运行在一个操作系统下，构建了一个跨越多个分布式节点的单一虚拟 SMP 机器，极大简化了分布式系统的挑战，使程序员能够专注于计算任务，而无需处理并行化的复杂细节。
+       ScaleMP 的 vSMP 系统利用 InfiniBand 高性能、低延迟的互连网络创建统一的虚拟 SMP 系统。该系统通过 虚拟化层处理远程直接内存访问（RDMA） 和专有的一致性算法确保缓存一致性，并将所有 PCI 和 I/O 设备统一到单一操作系统中，方便利用多个加速器。vSMP 提供两种配置模式：系统扩展模式适用于计算密集型应用，整合所有 CPU 和内存资源；内存扩展模式适用于需要大量主内存的应用，优化内存利用和性能。
        ScaleMP有三个产品：
 1.vSMP Foundation for SMP：
        通过软件将多个物理服务器资源整合在一起，提供一个单一的、高性能的计算环境；
+       vSMP 使用高性能、低延迟的 InfiniBand 互连网络。InfiniBand 提供了远程直接内存访问（RDMA），允许内存操作直接在虚拟化层进行处理，减少延迟并提高吞吐量。vSMP 可以将多个节点的内存聚合为一个统一的大规模共享内存池，采用专有的缓存一致性算法，保证跨多个节点的缓存一致性。包括块级并发控制和高级缓存技术，最大限度地减少 InfiniBand 的延迟和冗余内存操作。并且将所有 PCI 和 I/O 设备整合到单一操作系统中，形成一个大型的 I/O 设备池，在需要使用多个加速器的应用时效果明显。
        优点：
      （1）通过聚合多个物理服务器的资源，提供类似高端SMP系统的性能；
      （2）单一系统映像（SSI）简化了操作系统和应用程序的管理；
@@ -28,5 +35,10 @@ Hardware Consolidation
        缺点：
      （1）对云平台的依赖较强，云平台的问题可能会影响系统的性能和稳定性；
      （2）数据安全和隐私存在一定风险；
+     （3）最终没有做起来，与云服务商竞争，不具备充足的竞争力；
+       ScaleMP vSMP Foundation for Cluster与SGE对比：
+       二者都是用于高性能计算（HPC）集群管理的解决方案；
+       ScaleMP vSMP Foundation 适用于需要将多个节点聚合为单一虚拟系统的大型SMP系统，简化并行编程并提供高性能互连和加速器支持。适合需要高性能计算和大规模内存聚合的场景。
+       Sun Grid Engine (SGE) 则是一个灵活且成本较低的作业调度系统，适用于多种操作系统和硬件平台，提供多种调度策略和资源管理功能，适合大规模集群管理和多用户共享资源的场景。
 https://blog.csdn.net/china_world/article/details/6574690
 https://www.doit.com.cn/p/57532.html
