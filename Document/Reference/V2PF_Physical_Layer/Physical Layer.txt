@@ -1,0 +1,21 @@
+Physical Layer
+       --RDMA/RoCE
+       ①RDMA（Remote Direct Memory Access）
+       随着技术飞速发展，业务应用有越来越多的数据需要从网络中获取，对数据中心网络交换速度和性能要求越来越高。传统的TCP/IP通信存在的主要问题即I/O瓶颈问题，在高速网络环境下与网络I/O相关的主机处理的高开销限制了机器之间的传输带宽。具体来说，传统TCO/IP网络通信通过内核发送消息，需要在内核中频繁进行协议封装和解封操作，造成很大的数据移动和复制开销，性能低下；且网络通信协议在内核中处理，很难支持新的网络协议和消息协议以及发送和接受接口，灵活性低下。
+       RDMA，全称远程直接内存访问，是为解决网络传输中服务器端数据处理的延迟而产生的，实现了更快更轻量级的网络通信。RDMA将用户应用中的数据直接传入服务器的存储区，通过网络将数据从一个系统快速传输到远程系统的存储器中，消除了传输过程中多次数据复制和文本交换的操作，降低了CPU的负载。
+       同TCP/IP对比，RDMA利用栈旁路和零拷贝技术实现了低延迟，同时减少了CPU占用，减少了内存带宽瓶颈，提高了很高的带宽利用率；且提供了基于I/O的通道，允许一个应用程序通过RDMA设备对远程虚拟内存进行直接读写。
+       RDMA技术主要包括：
+       IB（InfiniBand）：基于InfiniBand架构的RDMA技术，由IBTA（InfiniBand Trade Association）提出。搭建基于IB技术的RDMA网络需要专用的IB网卡和IB交换机。
+       iWARP（Internet Wide Area RDMA Protocal）：基于TCP/IP协议的RDMA技术，由IETF标准定义。iWARP支持在标准以太网基础设施上使用RDMA技术，但服务器需要使用支持iWARP的网卡。
+       RoCE（RDMA over Converged Ethernet）：基于以太网的RDMA技术，也是由IBTA提出。RoCE支持在标准以太网基础设施上使用RDMA技术，但是需要交换机支持无损以太网传输，需要服务器使用RoCE网卡。
+       RDMA技术优势：
+       1.零拷贝：在不涉及到网络软件栈的情况下，应用程序能够直接执行数据传输。数据可以直接发送到缓冲区或者直接从缓冲区里接收，无需被复制到网络层；
+       2.存在内核旁路，应用程序可以直接在用户态执行数据传输，不需要在内核态与用户态之间做上下文切换；
+       3.不需要CPU干预；
+       4.RDMA无需操作系统和TCP/IP协议的介入，可以轻易的实现超低延时的数据处理、超高吞吐量传输;
+       5.数据被处理为离散消息而不是流，消除了应用程序将流切割为不同消息/事务的需求；
+       6.支持分散/聚合条目，即支持读取多个内存缓冲区然后作为一个流发出去或者接收一个流然后写入到多个内存缓冲区去；
+       7.提供的所有接口都是异步通信接口，可以更加便利的实现计算和通信分离；
+https://support.huawei.com/enterprise/zh/doc/EDOC1100203347https://www.h3c.com/cn/Service/Document_Software/Document_Center/Home/Switches/00-Public/Learn_Technologies/White_Paper/RDMA_Tech_White_Paper-6W100/?CHID=365285
+https://www.h3c.com/cn/Service/Document_Software/Document_Center/Home/Switches/00-
+https://blog.csdn.net/qq_40323844/article/details/90680159
