@@ -48,7 +48,7 @@ __The heritage of the past is the seed that brings forth the harvest of the futu
     - How should we pass the messages, in a pubsub model, or a sndrcv notification model?
     - Variables are better in a pubsub model and the OS underlying could always optimize for that. Pubsub exposes causality in a better way as it provides a handle to group the receivers.
     - Notifications, blockings, are instead better to go through the sndrcv model. They are one-to-one in nature though you can make them pubsub as well.
-      - Possibly have your APP/GROUPNAME or something else, and pubsub.
+    - Possibly have your APP/GROUPNAME or something else, and pubsub.
   - Other abstractions can __ALL__ drop upon message-passing, even shared memory. So we have forward compatibilities as well.
   - Language neutrality will be there, or not? It seems we need to have them, but some languages are just ill-suited to building such APPs.
 - Blockchain/BFT protocols
@@ -119,7 +119,7 @@ __What's past is prologue -- William Shakespeare__
   - the world is fundamentally diverse rather than unified; diversity is in its roots
   - support existing accelerators and inspire future ones
 - PoW is fundamental, but BFT + Proof-of-sth-else (e.g. PoS) might be used as a retarded replacement
-  - the world fundamentally favors proof-of-work, because hard work is blut und eisen
+  - the world fundamentally favors proof-of-work, because hard work is blut und eisen, because macht geht vor recht
   - nice magic numbers: 1/3, 1/2, 2/3 - they end up in the constitution of many nations for a reason
   - we don't need global consensus, as such consensus does not fundamentally exist in the universe, for sure
 - but we as humans are fond of an instant, ideal, unified, and ubiquitous computing experience
