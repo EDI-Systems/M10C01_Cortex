@@ -2,7 +2,7 @@
 \usepackage{CJKutf8}
 \usepackage{url}
 \usepackage{biblatex}
-\usepackage{hyperref}
+\usepackage[colorlinks,linkcolor=red]{hyperref}
 \usepackage{graphicx}
 \addbibresource{v1pc.bib}
 \begin{document}
@@ -112,7 +112,8 @@ RESTful Web 服务支持缓存，缓存是指将一些响应存储在客户端�
 2015年，Google 开源Google Remote Procedure Cal(gRPC)，gRPC 使用 PB 作为序列化的解决方案，而在传输的介质上使用了 HTTP/2而不是常见的TCP。gRPC 是一个多路复用、双向流式 RPC 协议。在一般的 RPC 机制中，客户端发起到服务器的连接，只有客户端可以请求，而服务器只能响应传入的请求。然而，在双向 gRPC 流中，虽然初始连接是由客户端发起的(称为端点1) ，但是一旦建立连接，服务器(称为端点2)和端点1都可以发送请求和接收响应。这极大地简化了两个端点相互通信的开发(如网格计算)。由于两个数据流都是独立的，这也省去了在端点之间创建两个独立连接的麻烦(一个从端点1到端点2，另一个从端点2到端点1)。
 
 \section{Consensus Mechanism}
-\subsection{Byzantine fault-tolerant(BFT)}
+\subsection{Classification of consensus mechanisms}
+\subsubsection{Byzantine fault-tolerant(BFT)}
 BFT自20世纪80年代提出以来\cite{lamport1982byzantine}，已经得到了广泛的研究。在第一个被称为PBFT\cite{castro2002practical}的实用BFT协议之后，有许多实用BFT协议被提出。根据时序假设，BFT可以分为三种类型：同步、异步和部分同步协议。
 
 2016年，Andrew Miller等人提出了HoneyBadgerBFT\cite{miller2016honey}，这是第一个实用的异步BFT协议，它在不做任何时序假设的情况下保证了生存性。HoneyBadgerBFT的核心部分由两部分组成，分别是原子广播(Atomic Broadcast)和异步公共子集协议(Asynchronous Common Subset)，在协议开始以前，每个主机准备好各自的提案（即试图写入共识的数据），启动N个原子广播的实例（N为网络中主机的个数）。在某一个原子广播完成以后遂将该广播对应的主机编号作为输入启动异步公共子集协议。异步公共子集协议在收集到足够多的主机编号后终止，所有的非敌手主机得到一个关于子集的共识。根据这个子集这些主机将从原子广播阶段获得的提案写入共识。
@@ -123,19 +124,199 @@ BFT自20世纪80年代提出以来\cite{lamport1982byzantine}，已经得到了�
 
 2019年，Maofan Yin 等在论文《HotStuff: BFT Consensus with Linearity and Responsiveness》\cite{yin2019hotstuff}中对 PBFT 算法进行了改进：利用主节点来简化通信量，同时将视图切换与共识操作进行统一。值得一提的是，Facebook Libra 白皮书中采用了该成果。
 
-\subsection{Consensus mechanism based on proof of concepts}
+\subsubsection{Consensus mechanism based on proof of concepts}
 由于无许可的区块链网络不允许身份验证或显式同步方案。因此，期望其中的共识协议具有良好的可扩展性，并且能够容忍伪身份和较差的同步。由于任何节点都能够为区块链头部提出具有自己的候选块的状态转换，因此无许可网络中的共识协议的主要目标是确保每个共识节点都遵守“最长链规则”[3]。也就是说，当块被组织在链表中时，在任何时间实例中，只有最长的链可以被接受为区块链的规范状态。由于缺乏身份验证，基于直接投票的BFT协议不适合无许可的区块链网络。基于激励的Nakamoto Consensus\cite{nakamoto2008bitcoin}被广泛采用。
 
 在Nakamoto Consensus的基础下，产生了许多基于概念证明的共识机制，包括PoW、
 PoUS、uPoW、PoR、PoST、PoM、PoH等方案。
 
-\subsection{Virtual Block Mining and Hybrid Consensus Mechanisms Beyond Proof of Concept}
-2019年，Wenbo Wang等人在《A Survey on Consensus Mechanisms and Mining Strategy Management in Blockchain Networks》\cite{wang2019survey}对超越概念证明的虚拟块挖掘和混合共识机制进行了讨论，文中提出了两种类型：基于股权证明和虚拟挖矿和混合共识协议。
+\subsubsection{Virtual Block Mining and Hybrid Consensus Mechanisms Beyond Proof of Concept}
+2019年，Wenbo Wang等人在《A Survey on Consensus Mechanisms and Mining Strategy Management in Blockchain Networks》\cite{wang2019survey}对超越概念证明的虚拟块挖掘和混合共识机制进行了讨论，文中提出了两种类型：基于权益证明和虚拟挖矿与混合共识协议。
 
-在基于股权证明和虚拟挖矿中，介绍了PoS的概念，它是一种修改后的PoW方案，旨在减少因耗尽哈希查询而产生的能源消耗。讨论了纯PoS协议的设计，例如Ouroboros协议，它使用“跟随硬币”算法来选举区块提议的领导者，并根据持有者的股份进行随机分配。讨论了基于委员会的PoS协议，例如PoA和Snow White协议，它们将领导者选举和区块生成/验证过程结合在一起，类似于传统的拜占庭容错协议。
+在基于权益证明和虚拟挖矿中，介绍了PoS的概念，它是一种修改后的PoW方案，旨在减少因耗尽哈希查询而产生的能源消耗。讨论了纯PoS协议的设计，例如Ouroboros协议，它使用“跟随硬币”算法来选举区块提议的领导者，并根据持有者的股份进行随机分配。讨论了基于委员会的PoS协议，例如PoA和Snow White协议，它们将领导者选举和区块生成/验证过程结合在一起，类似于传统的拜占庭容错协议。
 
-=======
 在混合共识协议中，讨论了将Nakamoto协议与快速拜占庭容错协议（如BFT）结合起来的方法，以实现更高的吞吐量和立即的最终性。介绍了Bitcoin-NG协议，它将共识过程分解为领导者选举和事务序列化两个平面，并使用两种类型的区块来实现更高的吞吐量。讨论了PeerCensus协议，它使用PoW方案来选择BFT委员会成员，并确保事务提交与区块生成独立进行。讨论了将虚拟挖矿机制（如PoS）与BFT协议结合起来的方法，例如Tendermint协议，它使用股份来衡量投票权，并通过轮询方案来选择区块提议的领导者。
+
+\subsection{Analysis of Consensus Mechanisms}
+FLP不可能原理表明：异步的分布式系统中不存在面向任意场景的共识算法。CAP原理表明：分布式系统最多只能同时满足一致性、可用性和分区容错性中的两项特性。因此在设计分布式系统时，设计完美的确定性分布式协议是徒劳无功的。但是，不同于传统的分布式系统，区块链网络是分布式和去中心化结合的网络，因此需要根据区块链网络的特点作出有别于传统分布式系统的CAP定义：
+\begin{itemize}
+\item[$\bullet$]一致性：分布式对等系统中的概率共识可以解决拜占庭故障，从而达到最终的一致性。
+\item[$\bullet$]可用性：每次请求都能获取到非错的响应，但是不保证获取的数据为最新数据。
+\item[$\bullet$]分区容忍性：系统能够在一定的时限内达成数据一致性。
+\end{itemize}
+
+为了满足实际应用场景的需求，区块链的共识协议需要在一致性、可用性和分区容忍性实现完美平衡。考虑到不同应用场景的差异，因此提出了几个重要的评价指标用于衡量不同的共识机制。
+\begin{itemize}
+\item[$\bullet$]共识机制的拜占庭容错能力
+\item[$\bullet$]共识机制的去中心化水平
+\item[$\bullet$]提案节点的选择机制
+\item[$\bullet$]需要形成的共识内容
+\item[$\bullet$]节点达成共识的形式
+\item[$\bullet$]激励机制和惩罚机制
+\item[$\bullet$]应对恶意攻击的能力
+\end{itemize}
+
+\subsubsection{BTC}
+BTC是一个分布式对等账本。一个加入BTC网络的用户可以生产任意个成对的公钥和私钥。私钥由用户保存，是不应该泄露给他人的。私钥可以用于对消息签名，签名不可伪造，并且是可以通过私钥对应的公钥验证的。密码学保证签名具有以下特点：
+
+(1)有效性。如果用户用私钥签名了一个消息，那么其他任何人使用私钥对应的公钥、消息原文来验证签名，该签名必须是有效的。
+
+(2)不可伪造性。如果没有掌握某个私钥，就无法对一条之前该私钥没有签过名的消息生成一个签名，并且使它可以被公钥验证为有效。也就是说，仅仅掌握了公钥是无法伪造相应私钥的签名的。在实际情况中，找到公钥对应私钥的代价通常非常巨大，以至于我们认为这是“无法完成的”。
+
+一次共识过程开始于节点对“哪些未确认的交易应该被确认”发出提案。在BTC网络中，交易都是被“打包”放进区块进行处理的。区块（Block）是一个精心设计的数据结构，它包含两部分。第一部分是一个哈希指针，它包含上一区块的哈希值，可以表明自己上一个区块的信息。第二部分是一个Merkle树，它的叶节点是被打包进该区块的所有交易的哈希值，非叶子节点则是根据它的两个子节点计算出的哈希值。通过Merkle各节点的哈希可以方便地验证该区块内所有交易的完整性。
+
+一个区块还包含了一个coinbase交易（币基交易），这部分固定的奖励BTC是被新“创造”出来的，将被支付给打包这个区块的节点。节点的选择来源于节点之间有竞争“记账权”的动力，竞争过程所有的节点都可以参与，每个节点都希望自己打包的区块成为系统的长期共识（最终一致性共识），因为只有这样自己才能获得币基交易的奖励。记账权的确认来源于一个数字解谜过程，即寻找nonce的过程，谁最先找出对应的nonce谁就获得记账权。
+
+通过采用最长链原则达成最终一致性，每个区块都包含有一个指向前一区块的哈希指针，并由此可以追溯到创世区块，我们定义从创世区块到这个区块所形成的“链”上的区块总数为该区块的区块高度。BTC网络规定，当网络中存在所谓的“分叉”时，即多个区块同时引用了同一个区块的哈希指针，只有最长链（即区块高度最高的链）上的交易会被承认，因此比特币的拜占庭容错能力是50\%。区块链没有设计直接的惩罚机制，但是违反最长链原则需要至少拥有全网算力的51\%,因此节点恶意行为不能影响大于50\%的网络就是无用功，白白浪费算力和资源，博弈论告诉我们，如果在短链上解谜的节点是理性的，那么它们应该立即抛弃这条较短的链，切换回最长链。因此，整个系统必然会在一个时刻，使所有接入网络的节点对系统的状态达成一致，所达成的共识就是当前的最长链。
+
+\url{https://medium.com/@tokenroll/%E5%9D%8E%E5%9D%B7%E7%9A%84-%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6-%E4%B9%8B%E8%B7%AF-%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E5%BC%95%E5%8D%B7%E4%B9%8B%E4%B8%80-25557c66af70}
+\subsubsection{ETH2.0}
+Gasper 是一个由信标链协议实现的抽象的权益证明协议层。在信标链协议中，参与的节点（或者叫 “验证者”）都在系统中存有保证金（stake，形式为 ETH）。验证者通过向网络提交见证消息（attestation） 来证实区块的有效性并为其多种属性投票。信标链协议本身包含了多种工具，以帮助验证者们对区块链的最新状态达成共识。
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=1\textwidth]{Figures/read-gasper.png}
+\caption{Gasper} 
+\label{fig:Gasper}
+\end{figure}
+
+如图\ref{fig:Gasper}所示，Gasper 要解决的是Ethereum2.0 共识层的 Fork choice 和 block最终确定性(finality)的问题。Gasper 是Casper FFG 算法（Casper the Friendly Finality Gadget， 下文称Casper）和 LLMD GHOST(下文称GHOST) 的组合。 Casper解决的是finality, GHOST解决的是Fork choice。
+
+Casper FFG 算法由Vitalik Buterin\cite{buterin2017casper}在2017年提出，Casper FFG在当前PoW的基础上，添加了一层PoS投票过程，进一步增强了Finality, 旧的区块理论上不可能被撤销。Casper FFG是一个没有侵入性的算法，它没有改变当前Ethereum的PoW算法，只是在这一层PoW上添加了BFT风格的PoS，也就是说所有的块，还是PoW矿工挖出来的，这条核心流程保留了下来。在这基础上，每挖出100个块，PoS的验证节点们会对最后一个块进行投票，2/3通过后，这最后一个块称为checkpoint(检查点)。凡是被finalized的检查点，不可撤销。总结一句话，就是保留了PoW出块的机制，同时每隔100个块来一次PoS投票，进一步增强了Ethereum的安全性(Safety，即Finality). 所有最终确定的检查点都成为规范链（区块链历史的一部分），所有忠诚节点都同意他们永远不会逆转这条链。「最终检查点」之后的区块可以随意分叉，但之前的区块不允许分叉。
+
+LMD-GHOST(Latest Message Driven GHOST)由Yonatan Sompolinsky\cite{sompolinsky2015secure}在2015年提出，它是一种分叉选择的规则，主要用于处理pos中的分叉。其实在以太坊上一个版本中就提到过GHOST协议，用于产生分叉带来叔块引用，将此协议做了pos环境下的升级，依据投票比重来选择正确的区块。由于网络延迟或者潜在攻击的问题，新的区块产生可能会发生分叉，这时，我们选择的策略就叫LMD（最新的消息驱动），我们会选择票数最多（权重）的链作为权威链，这一点区分于pow中的最长链原则。如图\ref{fig:GHOST}所示， 圆圈表示validator, 方块表示block, block 中的数字表示区块上积累的投票数，子节点的投票会向上累加到父节点。 图中，蓝色区块为每一层上获得投票最多的区块，连在一起为当前视图中最可信的一条链。
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=1\textwidth]{Figures/GHOST.png}
+\caption{LMD-GHOST} 
+\label{fig:GHOST}
+\end{figure}
+
+为了更好的鼓励验证者诚信投票，pos针对投票设计了一套奖惩机制。奖励的组成如图\ref{fig:reward}所示，参与委员会，成为提议者，验证区块都可以获得奖励，其中，提议者的奖励是最多的，具体的比例和计算公式可从附录提供的资料查阅。
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=1\textwidth]{Figures/eth reward.png}
+\caption{ETH2.0 Rewards} 
+\label{fig:reward}
+\end{figure}
+
+以太坊共识层面可能存在的攻击有很多种，这里主要介绍长程攻击（long range attacks），无利害攻击（noting to stake attacks）和大型质押攻击。
+
+长程攻击有两种情况，第一种情况是，攻击者作为参与创始区块的验证者，在原本的区块链旁维护一个单独的区块链分叉，并最终说服诚实的验证者在很久以后的某个时间点切换过去。但是该攻击在信标链上无法实现，因为“finality gadget”可确保所有验证者定期就诚实链的状态（“检查点”）达成一致，此后检查点之后的区块将无法再进行重组。第二种情况是，当新节点加入网络时，将从离其最近的节点处获取信息（称为弱主观性检查点）作为伪创始区块构建区块链。**这将为加入网络的新节点创建一个“信任网关”，然后其才能开始自己验证区块。然而，从区块浏览器等客户端收集构建检查点所需的可信区块信息，并不能增加客户端本身的可信度，因此主观性是“弱的”。因为根据定义，检查点由网络上的所有节点共享，所以不诚实的检查点是共识失败的状态。
+
+无利害攻击就是说相对于pow而言，pos分叉成本非常低，因为对于单个矿工来说，自身算力是有限的，所以为了利益它必须遵守最长链原则，而pos一旦获得投票资格，可以随意支持区块造成分叉所以才会有奖惩机制的设立，避免这种攻击行为。
+
+大型质押攻击就是说攻击者持有相应比例的eth时，会触发以下危机：
+
+33\%：延迟终局性
+
+34\%：导致双重终局性
+
+51\%：控制区块链的未来
+
+66\%：控制区块链的过去
+
+质押攻击主要的应对措施就是通过惩罚机制将攻击者强制退出网络，发起社区提议罚没攻击者资产，在现实社交网络进行协调等等。
+
+ETH2.0采用的Gasper协议基于pBFT实现，因此和pBFT一样，具有1/3的拜占庭容错。
+
+\url{https://learnblockchain.cn/article/4778#GHOST}
+
+\url{https://learnblockchain.cn/article/6037#2.5%20pos%E5%A5%96%E6%83%A9}
+
+\url{https://www.web3sj.com/news/21111/}
+
+\subsubsection{Solana}
+PoH 的核心是一种类似于可验证延迟函数 (VDF) 的简单哈希算法。 Solana 使用SHA-256来实现这一点，并使用一次迭代的输出作为下一次迭代的输入。该计算在每个验证器的单个核心上运行。虽然序列生成是顺序且单线程的，但可以并行验证输出，从而可以在多核系统上进行高效验证。这个机制允许 Solana 以加密的方式展示真实时间已经过去，生成连续的输出。因此，存在清晰、可验证的交易顺序，确保了一致的事件时间轴。验证者因此可以轻松验证经过的时间有多长，进一步增强了网络的可信度。篡改哈希链的任何部分都会需要重新计算所有后续的哈希，这是一项算力密集型的工作，可保护网络免受更改的影响。
+
+PoH（历史证明）显著减少了验证者每个区块需要处理的信息量。通过使用交易最新状态的哈希版本，区块确认时间被大幅缩短。当验证者（或复制节点）收到一个区块时，PoH（历史证明）序列为它们提供了一个具有加密可靠的交易顺序，他们可以在无需重新验证的情况下信任。这种效率对于加快共识机制至关重要，因为网络可以迅速选择并转移到下一个验证者进行区块验证。
+
+Solana使用结合PoH和Tower BFT的共识机制，在碎片（部分区块）传播到其他验证器后运行。Tower BFT是一种类似pBFT的共识算法，旨在利用PoH同步时钟运算，节省验证节点验证区块时间正确性的步骤。
+
+在Solana的Tower BFT共识中，由两种角色参与。一种是领导者（区块生产者），另一种是验证者。领导者就是负责记录数据(或记账)的，而验证者则是负责对数据(或交易信息)进行验证的。Solana每一个工作epoch被划分为若干时隙，而领导者也会被安排成为一个时间表，每个领导者在指定的时隙内工作。通俗地说，领导者们排好队，轮流出块。而验证者对区块信息进行确认。有超过2/3的验证者验证通过，就可以确认该区块的信息。
+
+DBFT通过拜占庭容错算法来完成共识。DBFT共识算法具有1/3的容错性，只要有2/3以上的领导人达成共识，就可以完成出块。每一个区块都有最终性，不会产生分叉。另一方面，它使用了历史证明序列的方式来提速。在其他区块链中，某一个区块的确认出现了延迟，那这个区块其后的交易处理和数据存储都会延迟，必须要等到上一个区块信息确认完成以后，才可以继续后面的信息处理。而在Tower BFT算法中，验证者可以明确知晓下一个区块的领导者，那么当验证者收到新的交易信息以后，可以直接与下一个区块的验证者进行信息确认。也就是说，Solana中的出块和信息确认都是异步进行。记录一个块的信息，不需要等待上一个块的完成。
+
+内存池管理(Gulf Stream)，由于Solana使用了历史证明序列，每一个区块的信息在等待验证时形成了一个内存池。Solana的公链程序中会存储当前的领导者序时列表，用户也好、验证者也好，可以知晓下一个领导者是哪一个节点。因此，用户和验证者可以提前将交易转发给预期的领导者。换句话说，待处理的事务会流动到下一个区块的内存池中了。
+
+历史证明序列的引入，改变了Solana的内存池结构。在其他公链上，所有的待确认信息处于同一个内存池，而在Solana由于信息在写入区块时，时间与信息会共同加密存储，这样信息的储存不会乱套，仍然可以分清谁先谁后。Solana每一个区块可以形成独立的内存池。解释是将事务缓存和转发推到网络边缘。事实上，是Solana是将确认的信息推到一个内存池的边界，流动到下一个区块的内存池之中，从而进行并行的处理。这使验证者可以提前执行事务，减少确认时间，更快地切换领导者，并减少来自未确认事务池的验证者的内存压力。
+
+\url{https://steemit.com/sct/@tvb/solana}
+
+\subsection{Tendermint}
+Tendermint的节点分为两种类型：validator和非validator节点。validator节点参与共识，也就是对区块（包含一批交易）进行共识，包括propose区块，对提议的区块进行投票。而非validator节点不参与共识，但会帮助传播区块和投票消息，以及相互同步状态等。节点之间不一定两两相连，和一个节点直接相连的那些节点称作peers。无论是validator节点，还是非validator节点，都包含与共识过程相关的一些状态，如区块链当前高度height，round，以及step等。节点之间运行gossip协议，相互同步共识状态和区块链状态信息。
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=1\textwidth]{Figures/Tendermint.png}
+\caption{Tendermint} 
+\label{fig:Tendermint}
+\end{figure}
+
+如图\ref{fig:Tendermint}描述了共识的过程：从Propose区块开始，进行Prevote和Precommit两个阶段的投票。如果投票达成共识，则依次进入Commit 和 NewHeight阶段，完成共识，区块链高度增加。整个过程称为一个round。不管投票是否达成共识，系统将推进到下一个round，进行新一轮的共识。
+
+一个共识过程可能需要多个round的原因可能有：
+（1）指定的proposer节点不在线。
+（2）proposal block无效。
+（3）节点没有及时收到proposal block。
+（4）虽然proposal block有效，但是没有足够多的节点在Precommit 阶段及时收到对应的 +2/3 的prevotes。
+（5）虽然proposal block有效，也有足够多的节点接收到了+2/3 的prevotes，但是没有足够多的节点收到+2/3 的 precommits。
+
+类似上述情况的解决方法有：
+（1）系统变更到下一个round，重新指定proposer节点。
+（2）round变更时，增加各阶段的超时时间。
+
+1、Propose 阶段(height:H,round:R)
+在这一阶段，指定的proposer节点组装并广播proposal（提议内容）。
+（1）proposer节点指定方式为：依据当前的round和各validator的投票权，采取确定性的、非阻塞的roundrobin选择算法来选取。
+
+（2）proposal包含一个提议的区块，以及一个可选的、最新的PoLC-round（小于当前的round值R）。PoLC-round的含义是，针对该round，有一个PoLC，即有+2/3(多于2/3)的节点的prevote投票。仅在当前proposer节点知晓一个最新的PoLC-round时，才会将其包含在proposal中。 这里PoLC-round的作用是，必要时让节点从更旧的round 解除锁定，保持系统的liveness（活性）。
+
+Propose 阶段结束条件为：
+（1）超时时间内收到proposal block及PoLC-Round的所有prevote 投票(如果有的话)，则立即转到下一阶段：Prevote(H,R)；
+（2）否则，等到timeoutProposeR超时， 转到下一阶段： Prevote(H,R)。这里可以看到，节点在Propose 阶段会等待一小段时间：timeoutProposeR，来接收proposal。这是Tendermint所基于的一个弱同步假设。除此之外，算法的其余步骤为异步的。
+
+（3）公共退出条件
+上述公共退出条件具体指的是：
+
+收到针对特定block的 +2/3 的precommit 投票，则转到Commit(H)。
+
+收到(H,R+x)的任何 +2/3 的 prevote 投票，则转到Prevote(H,R+x)。
+
+收到(H,R+x)的任何 +2/3 的 precommit 投票，则转到Precommit(H,R+x)。
+
+上述公共退出条件在接下来将介绍到的 Prevote 和Precommit 阶段也都会起作用。
+
+2、Prevote 阶段 (height:H,round:R)
+
+每个validator节点进入到Prevote 阶段后，会投prevote 投票并向其他节点广播其投票。首先，如果节点自LastLockRound起lock在某一block，此时却有PoLC-Round的、另一个block或nil的PoLC，则节点unlock。这里 LastLockRound < PoLC-Round < R；否则，如果节点还lock在某一block，则针对该block 进行prevote（投票并广播，之后所有类似表述都可以类比理解）；
+否则，如果proposed block有效，则对其prevote；否则，如果proposed block无效，或者 没有及时收到，则prevote nil。
+
+Prevote 阶段的结束条件为：
+
+（1）收到任何+2/3 的prevote 投票后等待一段时间：timeoutPrevote。如果该时间内收到针对一个特定block或nil的+2/3 的 prevote 投票，则立即转到下一阶段：Precommit(H,R)；如果该时间内没有收到上述PoLC，则转到下一阶段：Precommit(H,R)。
+
+3、Precommit 阶段 (height:H,round:R)
+
+每个validator节点进入到Precommit 阶段后，会投 precommit 投票并广播其投票。
+首先，在(H,R)，如果节点有针对一个特定block的PoLC，则节点lock在该block，并且置LastLockRound =R，同时precommit 该block；否则，在(H,R)，如果节点有针对 nil 的一个PoLC，则节点unlock，同时precommit nil；否则，节点将保持其目前的lock状态不变（即如果已经lock了，则继续lock，否则，继续保持unlock的状态） ，并且 precommit nil。
+
+Precommit 阶段的结束条件为：
+
+收到任何+2/3 的 precommit 投票后等待一段时间：timeoutPrecommit，如果该时间内收到针对nil的+2/3的precommit 投票，则相当于没有共识出有效区块，立即转Propose(H,R+1)；否则，如果超时后也没有收到针对特定 block 的+2/3 的 precommit 投票，则相当于也没有共识出有效区块，转到Propose(H,R+1)。
+
+4、Commit 阶段 (height:H)
+
+这一个阶段中，节点尝试对区块进行commit:首先设置CommitTime = now()然后，节点等待接收完整的、将要 commit 的区块，然后转到 NewHeight(H+1) 阶段。
+
+5、NewHeight 阶段 (height:H)
+
+在这一阶段，节点最终完成整个共识过程的最后环节，使链的高度增加一个区块，具体步骤为：置LastCommit=Precommits（即+2/3的Precommit 投票的集合）；增加区块高度，将共识出的新区块添加到链上；置StartTime = CommitTime+timeoutCommit；等待直到StartTime，以便接收延迟的commits.最后，转到 Propose(H,0)，开始新的高度上的区块的共识。注意，此时round的编号又从0开始。
+
+\url{https://juejin.cn/post/6844903973086822408}
+
 \printbibliography
 \end{CJK}
 \end{document}
