@@ -96,7 +96,7 @@ ETL问题
 						Metacomputing
 1992,515cite
 构建元计算机的第一阶段主要是软件和硬件的集成工作，它包括将所有资源与高性能网络互连，实现分布式文件系统，协调跨系统的用户访问
-元计算机发展的下一个阶段超越了异构计算机网络的软件集成。第二阶段涉及将单个应用程序扩展到多台计算机上，允许中心的异构计算机集合协同工作以解决单个问题。这使用户能够尝试没有元计算机几乎不可能实现的各种计算。允许以一般方式完成此操作的软件(与一次性、临时解决方案相反)刚刚出现，并且随着用户开始使用它，正在进行评估和改进。
+元 计算机发展的下一个阶段超越了异构计算机网络的软件集成。第二阶段涉及将单个应用程序扩展到多台计算机上，允许中心的异构计算机集合协同工作以解决单个问题。这使用户能够尝试没有元计算机几乎不可能实现的各种计算。允许以一般方式完成此操作的软件(与一次性、临时解决方案相反)刚刚出现，并且随着用户开始使用它，正在进行评估和改进。
 元计算机发展的第三阶段将是一个透明的国家网络，它将极大地增加应用程序可用的计算和信息资源。这个阶段涉及的不仅仅是让本地元计算机使用远程资源(即，改变组件之间的距离)。第三阶段包括建立适当的WAN基础设施和开发管理、文件系统和安全方面的标准。
 作者以NCSA的元计算机作为第一阶段的范例，以SIGGRAPH在92年的文献作为第二阶段开始的范例，在理论模拟，分子虚拟现实等方面展示了元计算的部分成果
 						The Grid: A New Infrastructure for 21st Century Science
@@ -183,7 +183,168 @@ ApplicationMaster (AM)通过从RM请求资源、从它接收到的资源生成�
 为了执行和跟踪这些分配，RM与运行在每个节点上的称为NodeManager (NM)的特殊系统守护进程进行交互。RM和NMs之间的通信是基于心跳的，以实现可伸缩性。NMs负责监控资源可用性、报告故障和容器生命周期管理。
 
 当某个作业被生成时，作业通过一个公共提交协议提交给RM，并经过一个准入控制阶段，在此阶段，安全凭证被验证，各种操作和管理检查被执行。接受的作业被传递给要运行的调度程序。一旦调度器拥有足够的资源，应用程序就会从接受状态转到运行状态。为AM分配一个容器，并在集群中的一个节点上生成它。接受的应用程序的记录被写入持久存储，并在RM重新启动或出现故障时恢复。
-ApplicationMaster是作业的“头”，管理所有生命周期方面，包括动态增加和减少资源消耗，管理执行流(例如，根据映射的输出运行reducer)，处理故障和计算倾斜，以及执行其他局部优化。实际上，AM可以运行任意用户代码，并且可以用任何编程语言编写，因为与RM和NM的所有通信都是使用可扩展通信协议进行编码的
+Applicatio nMaster是作业的“头”，管理所有生命周期方面，包括动态增加和减少资源消耗，管理执行流(例如，根据映射的输出运行reducer)，处理故障和计算倾斜，以及执行其他局部优化。实际上，AM可以运行任意用户代码，并且可以用任何编程语言编写，因为与RM和NM的所有通信都是使用可扩展通信协议进行编码的
 为了获取容器，AM向RM发出资源请求。当代表AM分配资源时，RM为该资源生成一个租约，该租约由后续的AM心跳提取。当AM向NM提交容器租约时，基于令牌的安全机制保证其真实性
 
 
+						Bigtable: A Distributed Storage System for Structured Data
+@article{chang2008bigtable,
+  title={Bigtable: A distributed storage system for structured data},
+  author={Chang, Fay and Dean, Jeffrey and Ghemawat, Sanjay and Hsieh, Wilson C and Wallach, Deborah A and Burrows, Mike and Chandra, Tushar and Fikes, Andrew and Gruber, Robert E},
+  journal={ACM Transactions on Computer Systems (TOCS)},
+  volume={26},
+  number={2},
+  pages={1--26},
+  year={2008},
+  publisher={ACM New York, NY, USA}
+}
+2008，8061cite
+作者设计、实现并部署了一个分布式存储系统
+Bigtable是一个分布式存储系统，用于管理结构化数据，其设计用于扩展到非常大的规模:数千台商用服务器上的pb级数据。
+Bigtable旨在可靠地扩展到pb级数据和数千台机器，已经实现了几个目标:广泛的适用性、可伸缩性、高性能和高可用性。
+
+Bigtable不支持完整的关系数据模型;相反，它为客户机提供了一个简单的数据模型，该模型支持对数据布局和格式的动态控制，并允许客户机推断底层存储中表示的数据的局部性属性。
+Bigtable还将数据视为未解释的字符串，尽管客户端经常将各种形式的结构化和半结构化数据序列化到这些字符串中。
+最后，Bigtable模式参数允许客户端动态控制从内存还是从磁盘提供数据。
+
+Bigtable集群是运行Bigtable软件的一组进程。每个集群服务于一组表。Bigtable中的表是一个稀疏的、分布式的、持久的多维排序映射。数据被组织成三个维度:行、列和时间戳。
+我们将特定行键、列键和时间戳所引用的存储称为单元格。将行分组在一起以形成负载平衡单元，将列分组在一起以形成访问控制和资源计费单元。
+
+经验教训：
+大型分布式系统容易受到许多类型的故障的影响，而不仅仅是许多分布式协议中假定的标准网络分区和故障停止故障。
+推迟添加新功能是很重要的，直到清楚新功能将如何使用。
+最重要的一课是简单设计的价值。考虑到系统的大小(大约100,000行非测试代码)，以及代码随着时间以意想不到的方式发展的事实，可以发现代码和设计的清晰度对代码维护和调试有巨大的帮助。
+必须解决无共享数据库所面临的一些相同类型的负载和内存平衡问题。
+解决方法
+(1)不考虑相同数据的多个副本的可能性，可能由于视图或索引而以不同的形式
+(2)让用户告诉我们哪些数据属于内存，哪些数据应该留在磁盘上，而不是试图动态地确定这一点
+(3)没有复杂的查询需要执行或优化。
+
+The author designs, implements and deploys a distributed storage system
+Bigtable is a distributed storage system for managing structured data that is designed to scale to a very large size: petabytes of data across thousands of commodity servers.
+Bigtable is designed to reliably scale to petabytes of data and thousands of machines. Bigtable has achieved several goals: wide applicability, scalability, high performance, and high availability. 
+
+
+Bigtable does not support a full relational data model; instead, it provides clients with a simple data model that supports dynamic control over data layout and format, and allows clients to reason about the locality properties of the data represented in the underlying storage.
+Bigtable also treats data as uninterpreted strings, although clients often serialize various forms of structured and semi-structured data into these strings. 
+Finally, Bigtable schema  parameters let clients dynamically control whether to serve data out of memory or from disk
+
+A Bigtable cluster is a set of processes that run the Bigtable software. Each cluster serves a set of tables. A table in Bigtable is a sparse, distributed, persistent multidimensional sorted map. Data is organized into three dimensions: rows, columns, and timestamps.
+We refer to the storage referenced by a particular row key, column key, and timestamp as a cell. Rows are grouped together to form the unit of load balancing, and columns are grouped together to form the unit of access control and resource accounting.
+
+lessons learned：
+One lesson we learned is that large distributed systems are vulnerable to many types of failures, not just the standard network partitions and fail-stop failures assumed in many distributed protocols. 
+Another lesson we learned is that it is important to delay adding new features until it is clear how the new features will be used.
+The most important lesson we learned is the value of simple designs. Given both the size of our system (about 100,000 lines of non-test code), as well as the fact that code evolves over time in unexpected ways, we have found that code and design clarity are of immense help in code maintenance and debugging.
+
+Bigtable’s load balancer has to solve some of the same kinds of load and memory balancing problems faced by shared-nothing databases . 
+Our problem is somewhat simpler: 
+(1) we do not consider the possibility of multiple copies of the same data, possibly in alternate forms due to views or indices; 
+(2) we let the user tell us what data belongs in memory and what data should stay on disk, rather than trying to determine this dynamically; 
+(3) we have no complex queries to execute or optimize.
+
+
+						Boxwood: Abstractions as the Foundation for Storage Infrastructure
+@inproceedings{maccormick2004boxwood,
+  title={Boxwood: Abstractions as the Foundation for Storage Infrastructure.},
+  author={MacCormick, John and Murphy, Nick and Najork, Marc and Thekkath, Chandramohan A and Zhou, Lidong},
+  booktitle={OSDI},
+  volume={4},
+  pages={8--8},
+  year={2004}
+}
+2004，279cite
+实现分布式的、可靠的、存储密集型的软件(如文件系统或数据库系统)是很困难的。
+这些系统必须处理几个挑战，包括:将用户抽象(例如，文件、目录、表和索引)与底层存储提供的抽象相匹配，设计合适的数据放置、预取和缓存策略，以及提供足够的容错性、增量可伸缩性和易于管理性。
+通过使用由存储子系统直接提供的合适的抽象(如树、链表和哈希表)，可以大大降低这种感知到的困难，而不会影响存储系统的性能、可伸缩性或构建在其上的更高级别子系统的可管理性。
+尽管Boxwood的存储方法与磁盘提供的传统面向块的接口有很大的不同，但它提供了一些关键的优势。
+一个优点是，通过将数据结构直接集成到持久存储体系结构中，可以更简单地构建高级应用程序，同时以很小的成本获得容错、分布和可伸缩性的好处。
+此外，本质上可以处理稀疏和非连续存储的抽象使高级软件免于处理地址空间或空闲空间管理。
+第三个优点是，使用数据抽象中固有的结构信息可以使系统执行更好的负载平衡、数据预取和知情缓存。这些机制可以在基础设施中实现一次，而不必在每个子系统或应用程序中重复。
+
+作者认为，B树这种更简单的抽象为客户机应用程序提供了良好的性能和很大的灵活性，同时卸载了空闲空间(或在虚拟磁盘环境中，地址空间)管理的细节。
+
+boxwood系统被组织为几个相互依存的服务。作者使用分层作为管理boxwood系统复杂性的一种方式。例如，前面提到的b树和块存储服务是通过将前者分层到后者之上来构建的。
+反过来，块存储服务是在一个简单的复制逻辑设备抽象之上分层的。尽管由于上下文切换开销，分层有可能降低性能，但可以通过在单个地址空间内运行所有层来避免这些问题。
+
+作者总结道，初步经验表明，使用可伸缩的数据抽象作为基本的、低级的存储原语是有吸引力的。
+可以肯定的是，似乎很难确定一个单一的，普遍的抽象，满足所有的需求。然而，对抽象和服务的特殊组合似乎提供了一个良好的基础，在此基础上可以很容易地构建多个抽象。
+将块管理器用作通用存储分配器，从而避免了系统中其他地方对地址空间管理的需要，这似乎是广泛适用的。
+
+
+Implementing distributed, reliable, storage-intensive software such as file systems or database systems is hard.
+These systems have to deal with several challenges including: matching user abstractions (e.g., files, directories, tables, and indices) with those provided by the underlying storage, designing suitable data placement, prefetching, and caching policies, as well as providing adequate fault-tolerance, incremental scalability, and ease of management.
+Our hypothesis in this paper is that this perceived difficulty can be considerably lessened through the use of suitable abstractions such as trees, linked lists, and hash-tables, provided directly by the storage subsystem, without compromising performance, scalability, or the manageability of the storage system or the higher-level subsystems built on top of it.
+Although Boxwood’s approach to storage is a significant departure from traditional block-oriented interfaces provided by disks—whether physical, logical [17], or virtual [21]—we think it provides some key advantages.
+by directly integrating data structures into the persistent storage architecture, higher-level applications are simpler to build, while getting the benefits of fault-tolerance, distribution, and scalability at little cost. Furthermore, abstractions that can inherently deal with sparse and non-contiguous storage free higher level software from dealing with addressspace or free-space management. 
+A third advantage is that using the structural information inherent in the data abstraction can allow the system to perform better load-balancing, data prefetching, and informed caching. These mechanisms can be implemented once in the infrastructure instead of having to be duplicated in each subsystem or application.
+
+we believe that our simple chunk store abstraction provides a better match for applications that do not need the strict atomicity guarantees or the rigid structure of a B-tree. This simpler abstraction offers good performance and much flexibility to client applications while offloading the details of free space (or in a virtual disk environment, address space) management.
+The Boxwood system is organized as several interdependent services. We use layering as a way of managing the complexity in a Boxwood system. For example, the B-tree and the chunk store services mentioned earlier in Section 1 are constructed by layering the former on top of the latter. The chunk store service, in turn, is layered on top of a simple replicated logical device abstraction (to be described in Section 3.4). Although layering has the potential for reducing performance because of context switching overheads, our design avoids these problems by running all layers within a single address space.
+
+Our initial experience indicates that using scalable data abstractions as fundamental, low-level storage primitives is attractive. To be sure, it appears difficult to settle on a single, universal abstraction that will fit all needs. However, our particular combination of abstractions and services seem to offer a sound substrate, on top of which multiple abstractions may be readily built.
+
+Our use of the chunk manager as a generalized storage allocator obviating the need for address space management elsewhere in the system seems to be widely applicable. 
+
+
+
+						Mariposa: a new architecture for distributed data
+@inproceedings{stonebraker1994mariposa,
+  title={Mariposa: A new architecture for distributed data},
+  author={Stonebraker, Michael and Aoki, Paul M and Devine, Robert and Litwin, Witold and Olson, Michael},
+  booktitle={Proceedings of 1994 IEEE 10th International Conference on Data Engineering},
+  pages={54--65},
+  year={1994},
+  organization={IEEE}
+}
+1994，161cite
+
+The fundamental objective of Mariposa is to unlfy the (up until now) disparate approaches of distributed DBMSs, cachingbased distributed file systems, deepstore file systems and object servers. Mariposa distributes data over a collection of sites that are connected by some form of local- or wide-area network.
+
+A Mariposa database consists of Instances of objects in named classes, each containing a collection of attributes of specific data types.
+Each class is divided into a collection of fragments, which are the unit of storage in the system. Storage sites may split or coalesce fragments as desired. Fragments can optionally have a distribution criteria which controls the logical composition of instances in the fragment. Fragments do not have a specific home and can move freely within the network
+For example, if a fragment is being accessed frequently, one would expect its location to be moved from tertiary memory to disk, or even to main memory. When activity abates, its location would migrate to slower storage
+The Mariposa approach to these objectives is to designate one representation which each storage manager must support, the so-called canonical representation, and a second optional private representation. As such, fast fragment movement can be accomplished by moving the canonical representation from one storage manager to another.
+
+Each Mariposa site is locally autonomous, i.e., the site’s database administrator (DBA) .fully controls object storage at that site.
+
+Lastly, Mariposa has a query optimizer which must generate a plan for solving a query.
+
+As a result. the major aspects of Mariposa are: 
+a rule system compking an engine and rule set 
+fragment movement algorithms to allow mobile data 
+a query optimizer and execution engine 
+an approach to multiple copies for this environment 
+
+However, Mariposa must deal with the following additional difficulties.
+
+First, no site has perfect knowledge of global database state.
+Second, the optimizer has the option of moving the query to the site where it thinks the data resides or bringing the data to the site of the query. The choice of which strategy to employ is an optimization decision.
+Third, should Mariposa decide to move the data to the query, it must choose which copy to move or decide to make a new copy, again leading to an increase in complexity.
+Fourth, we assume that Mariposa sites can be heterogeneous, that is, they can have differing speeds, capacities and capabilities. For example, it may not be possible to execute all operations at all sites because of limitations on storage capacity.
+
+We have presented the architecture of Mariposa, a prototype data management system that unifies the best features of distributed operating system and distributed database management system research. Unlike previous distributed data management systems, Mariposa manages object storage in an environment of high data mobility and highly heterogeneous system capabilities while retaining high performance. In addition, Mariposa’s rulebased storage architecture preserves local site autonomy and gives site administrators considerable flexibility in specifying their storage policies.
+
+
+
+						The Vertica Analytic Database: C-Store 7 Years Later
+
+@article{lamb2012vertica,
+  title={The vertica analytic database: C-store 7 years later},
+  author={Lamb, Andrew and Fuller, Matt and Varadarajan, Ramakrishna and Tran, Nga and Vandier, Ben and Doshi, Lyric and Bear, Chuck},
+  journal={arXiv preprint arXiv:1208.4173},
+  year={2012}
+}
+2012,482cite
+
+The Vertica Analytic Database (Vertica) is a distributed , massively parallel RDBMS system that commercializes the ideas of the C-Store project.
+Vertica is designed for analytic workloads on modern hardware and its success proves the commercial and technical viability of large scale distributed databases which offer fully ACID transactions yet efficiently process petabytes of structured data.
+
+Vertica was explicitly designed for analytic workloads rather than for transactional workloads.
+Transactional workloads are characterized by a large number of transactions per second (e.g. thousands) where each transaction involves a handful of tuples. Most of the transactions take the form of single row insertions or modifications to existing rows. Examples are inserting a new sales record and updating a bank account balance.
+Analytic workloads are characterized by smaller transaction volume (e.g. tens per second), but each transaction examines a significant fraction of the tuples in a table. Examples are aggregating sales data across time and geography dimensions and analyzing the behavior of distinct users on a web site.
+As others have pointed out, it is possible to exceed the performance of existing one-size-fits-all systems by orders of magnitudes by focusing specifically on analytic workloads.
+
+Like C-Store, Vertica physically organizes table data into projections, which are sorted subsets of the attributes of a table. 
+
+end

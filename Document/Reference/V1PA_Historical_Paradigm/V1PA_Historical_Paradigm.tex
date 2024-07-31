@@ -1,0 +1,207 @@
+\documentclass[a4paper,twoside]{scrbook}
+
+% % 使用indentfirst宏包
+% \usepackage{indentfirst}
+% % 设置首行缩进距离
+% \setlength{\parindent}{2em}
+
+
+
+
+\begin{document}
+\title{Volume 1, Part I: Historical Paradigm}
+\author{EDI}
+\frontmatter
+\maketitle
+\tableofcontents
+\mainmatter
+
+
+\chapter{Mainframe research}
+\section{Introduction}
+
+what main frames are there?
+
+what's their composition, particularly those that have multiple memory or vector units?
+
+
+What kinds of memory model research have we done. and what have we learned?
+
+
+\section{Mainframe}
+\subsection{wiki-mainframe computer\cite{mainframewiki}}
+\subsection{The mainframe is dead. Long live the mainframe!\cite{sagers2013mainframe}}
+(2013,3cite)\par
+111
+\subsection{Using Hadoop on the Mainframe:A Big Solution for the Challenges of Big Data \cite{seay2015using}}
+(2015,14cite)\par
+111
+\subsection{The data center evolution from Mainframe to Cloud \cite{zlatanov2016data}}
+(2016,5cite)\par
+111
+\subsection{Metacomputing \cite{smarr1992metacomputing}}
+(1992,515cite)\par
+111
+\subsection{The Grid: A New Infrastructure for 21st Century Science \cite{foster2002grid}}
+(1998,5774cite)\par
+111
+\subsection{A Resource Management Architecture for Metacomputing Systems \cite{czajkowski1998resource}}
+(1998,929cite)\par
+111
+\subsection{The Harness Metacomputing Framework
+\cite{migliardi1999harness}}
+(1999,45cite)\par
+111
+\subsection{MapReduce: Simplified Data Processing on Large Clusters \cite{dean2008mapreduce}}
+(2008,22998cite)\par
+111
+\subsection{Apache Hadoop YARN: Yet Another Resource Negotiator \cite{vavilapalli2013apache}}
+(2013,2852cite)\par
+111
+%-----------------------------------------------------
+\chapter{Supercomputer research}
+\section{Introcuction}
+\section{Supercomputer}
+\subsection{High Performance Computing- History of the Supercomputer\cite{probert2013high}}
+(2013,2cite)\par
+111
+\subsection{The CRAY-1 Computer System\cite{russell1978cray}}
+(1978,1130cite)\par
+111
+\subsection{Reevaluating Amdahl's Law\cite{gustafson1988reevaluating}}
+(1988,2666cite)\par
+111
+\subsection{What’s Next in High-Performance Computing\cite{bell2002s}}
+(2002,185cite)\par
+111
+\subsection{High-Performance Computing: Clusters, Constellations, MPPs, and Future Directions\cite{dongarra2005high}}
+(2005,158cite)\par
+111
+\subsection{Distributed Shared Memory: Concepts and Systems \cite{protic1996distributed}}
+(1996,398cite)\par
+111
+\par
+\subsection{Exascale Computing Trends: Adjusting to the “New Normal” for Computer Architecture \cite{kogge2013exascale}}
+(2013,141cite)\par
+111
+\subsection{Computing beyond Moore’s Law
+\cite{shalf2015computing}}
+(2015,265cite)\par
+111
+\subsection{GPU Cluster for High Performance Computing \cite{fan2004gpu}}
+(2004,748cite)\par
+111
+\subsection{Hybrid CUDA, OpenMP, and MPI parallel programming on multicore GPU clusters \cite{yang2011hybrid}}
+(2011,200cite)\par
+111
+\subsection{Cluster, grid and cloud computing: A detailed comparison \cite{sadashiv2011cluster}}
+(2011,308cite)\par
+111
+\subsection{Bigtable: A Distributed Storage System for Structured Data \cite{chang2008bigtable}}
+(2008,8061cite)\par
+The author designs, implements and deploys a distributed storage system
+Bigtable is a distributed storage system for managing structured data that is designed to scale to a very large size: petabytes of data across thousands of commodity servers.
+Bigtable is designed to reliably scale to petabytes of data and thousands of machines. Bigtable has achieved several goals: wide applicability, scalability, high performance, and high availability. 
+\par
+
+Bigtable does not support a full relational data model; instead, it provides clients with a simple data model that supports dynamic control over data layout and format, and allows clients to reason about the locality properties of the data represented in the underlying storage.
+Bigtable also treats data as uninterpreted strings, although clients often serialize various forms of structured and semi-structured data into these strings. 
+Finally, Bigtable schema  parameters let clients dynamically control whether to serve data out of memory or from disk
+\par
+A Bigtable cluster is a set of processes that run the Bigtable software. Each cluster serves a set of tables. A table in Bigtable is a sparse, distributed, persistent multidimensional sorted map. Data is organized into three dimensions: rows, columns, and timestamps.
+We refer to the storage referenced by a particular row key, column key, and timestamp as a cell. Rows are grouped together to form the unit of load balancing, and columns are grouped together to form the unit of access control and resource accounting.
+\par
+Lessons learned：\par
+One lesson we learned is that large distributed systems are vulnerable to many types of failures, not just the standard network partitions and fail-stop failures assumed in many distributed protocols. 
+Another lesson we learned is that it is important to delay adding new features until it is clear how the new features will be used.
+The most important lesson we learned is the value of simple designs. Given both the size of our system (about 100,000 lines of non-test code), as well as the fact that code evolves over time in unexpected ways, we have found that code and design clarity are of immense help in code maintenance and debugging.
+\par
+Bigtable’s load balancer has to solve some of the same kinds of load and memory balancing problems faced by shared-nothing databases . 
+Our problem is somewhat simpler: 
+(1) we do not consider the possibility of multiple copies of the same data, possibly in alternate forms due to views or indices; 
+(2) we let the user tell us what data belongs in memory and what data should stay on disk, rather than trying to determine this dynamically; 
+(3) we have no complex queries to execute or optimize.
+\subsection{Boxwood: Abstractions as the Foundation for Storage Infrastructure \cite{maccormick2004boxwood}}
+(2004,279cite)\par
+Implementing distributed, reliable, storage-intensive software such as file systems or database systems is hard.\par
+These systems have to deal with several challenges including: matching user abstractions (e.g., files, directories, tables, and indices) with those provided by the underlying storage, designing suitable data placement, prefetching, and caching policies, as well as providing adequate fault-tolerance, incremental scalability, and ease of management.
+Our hypothesis in this paper is that this perceived difficulty can be considerably lessened through the use of suitable abstractions such as trees, linked lists, and hash-tables, provided directly by the storage subsystem, without compromising performance, scalability, or the manageability of the storage system or the higher-level subsystems built on top of it.
+Although Boxwood’s approach to storage is a significant departure from traditional block-oriented interfaces provided by disks—whether physical, logical [17], or virtual [21]—we think it provides some key advantages.
+by directly integrating data structures into the persistent storage architecture, higher-level applications are simpler to build, while getting the benefits of fault-tolerance, distribution, and scalability at little cost. Furthermore, abstractions that can inherently deal with sparse and non-contiguous storage free higher level software from dealing with addressspace or free-space management. 
+A third advantage is that using the structural information inherent in the data abstraction can allow the system to perform better load-balancing, data prefetching, and informed caching. These mechanisms can be implemented once in the infrastructure instead of having to be duplicated in each subsystem or application.
+
+we believe that our simple chunk store abstraction provides a better match for applications that do not need the strict atomicity guarantees or the rigid structure of a B-tree. This simpler abstraction offers good performance and much flexibility to client applications while offloading the details of free space (or in a virtual disk environment, address space) management.
+The Boxwood system is organized as several interdependent services. We use layering as a way of managing the complexity in a Boxwood system. For example, the B-tree and the chunk store services mentioned earlier in Section 1 are constructed by layering the former on top of the latter. The chunk store service, in turn, is layered on top of a simple replicated logical device abstraction (to be described in Section 3.4). Although layering has the potential for reducing performance because of context switching overheads, our design avoids these problems by running all layers within a single address space.
+
+Our initial experience indicates that using scalable data abstractions as fundamental, low-level storage primitives is attractive. To be sure, it appears difficult to settle on a single, universal abstraction that will fit all needs. However, our particular combination of abstractions and services seem to offer a sound substrate, on top of which multiple abstractions may be readily built.
+
+Our use of the chunk manager as a generalized storage allocator obviating the need for address space management elsewhere in the system seems to be widely applicable. 
+\subsection{Mariposa: a new architecture for distributed data\cite{stonebraker1994mariposa}}
+(1994,161cite)\par
+The fundamental objective of Mariposa is to unlfy the (up until now) disparate approaches of distributed DBMSs, cachingbased distributed file systems, deepstore file systems and object servers. Mariposa distributes data over a collection of sites that are connected by some form of local- or wide-area network.
+
+A Mariposa database consists of Instances of objects in named classes, each containing a collection of attributes of specific data types.
+Each class is divided into a collection of fragments, which are the unit of storage in the system. Storage sites may split or coalesce fragments as desired. Fragments can optionally have a distribution criteria which controls the logical composition of instances in the fragment. Fragments do not have a specific home and can move freely within the network
+For example, if a fragment is being accessed frequently, one would expect its location to be moved from tertiary memory to disk, or even to main memory. When activity abates, its location would migrate to slower storage
+The Mariposa approach to these objectives is to designate one representation which each storage manager must support, the so-called canonical representation, and a second optional private representation. As such, fast fragment movement can be accomplished by moving the canonical representation from one storage manager to another.
+
+Each Mariposa site is locally autonomous, i.e., the site’s database administrator (DBA) .fully controls object storage at that site.
+
+Lastly, Mariposa has a query optimizer which must generate a plan for solving a query.
+
+As a result. the major aspects of Mariposa are: 
+a rule system compking an engine and rule set 
+fragment movement algorithms to allow mobile data 
+a query optimizer and execution engine 
+an approach to multiple copies for this environment 
+
+However, Mariposa must deal with the following additional difficulties.
+
+First, no site has perfect knowledge of global database state.
+Second, the optimizer has the option of moving the query to the site where it thinks the data resides or bringing the data to the site of the query. The choice of which strategy to employ is an optimization decision.
+Third, should Mariposa decide to move the data to the query, it must choose which copy to move or decide to make a new copy, again leading to an increase in complexity.
+Fourth, we assume that Mariposa sites can be heterogeneous, that is, they can have differing speeds, capacities and capabilities. For example, it may not be possible to execute all operations at all sites because of limitations on storage capacity.
+
+We have presented the architecture of Mariposa, a prototype data management system that unifies the best features of distributed operating system and distributed database management system research. Unlike previous distributed data management systems, Mariposa manages object storage in an environment of high data mobility and highly heterogeneous system capabilities while retaining high performance. In addition, Mariposa’s rulebased storage architecture preserves local site autonomy and gives site administrators considerable flexibility in specifying their storage policies.
+
+\subsection{The Vertica Analytic Database: C-Store 7 Years Later\cite{lamb2012vertica}}
+(2012,482cite)\par
+
+The Vertica Analytic Database (Vertica) is a distributed , massively parallel RDBMS system that commercializes the ideas of the C-Store project.
+Vertica is designed for analytic workloads on modern hardware and its success proves the commercial and technical viability of large scale distributed databases which offer fully ACID transactions yet efficiently process petabytes of structured data.
+
+Vertica was explicitly designed for analytic workloads rather than for transactional workloads.
+Transactional workloads are characterized by a large number of transactions per second (e.g. thousands) where each transaction involves a handful of tuples. Most of the transactions take the form of single row insertions or modifications to existing rows. Examples are inserting a new sales record and updating a bank account balance.
+Analytic workloads are characterized by smaller transaction volume (e.g. tens per second), but each transaction examines a significant fraction of the tuples in a table. Examples are aggregating sales data across time and geography dimensions and analyzing the behavior of distinct users on a web site.
+As others have pointed out, it is possible to exceed the performance of existing one-size-fits-all systems by orders of magnitudes by focusing specifically on analytic workloads.
+
+Like C-Store, Vertica physically organizes table data into projections, which are sorted subsets of the attributes of a table. 
+
+
+%-------------------------------------------------------------------------
+\chapter{Memory model research}
+\section{Introcuction}
+\section{Multiprocessors}
+\subsection{Time, Clocks, and the Ordering of Events in a Distributed System\cite{lamport2019time}}
+(1978,14130cite)\par
+111
+\subsection{How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs\cite{lamport1979make}}
+(1979,3726cite)\par
+111
+\subsection{Memory Access Buffering in Multiprocessors\cite{dubois1986memory}}
+(1986,745cite)\par
+111
+\subsection{Foundations of the C++ Concurrency Memory Model\cite{boehm2008foundations}}
+(2008,625cite)\par
+111
+\section{Memory model}
+\subsection{Memory Consistency Models\cite{mosberger1993memory}}
+(1993,451cite)\par
+111
+
+\renewcommand{\bibname}{Reference}
+\bibliographystyle{unsrt}
+\bibliography{reference}
+
+
+\end{document}
