@@ -48,7 +48,7 @@ __The heritage of the past is the seed that brings forth the harvest of the futu
     - How should we pass the messages, in a pubsub model, or a sndrcv notification model?
     - Variables are better in a pubsub model and the OS underlying could always optimize for that. Pubsub exposes causality in a better way as it provides a handle to group the receivers.
     - Notifications, blockings, are instead better to go through the sndrcv model. They are one-to-one in nature though you can make them pubsub as well.
-      - Possibly have your APP/GROUPNAME or something else, and pubsub.
+    - Possibly have your APP/GROUPNAME or something else, and pubsub.
   - Other abstractions can __ALL__ drop upon message-passing, even shared memory. So we have forward compatibilities as well.
   - Language neutrality will be there, or not? It seems we need to have them, but some languages are just ill-suited to building such APPs.
 - Blockchain/BFT protocols
@@ -103,6 +103,50 @@ __The engineer has been, and is, a maker of history. -- James Kip Finch__
 __What's past is prologue -- William Shakespeare__
 
 </div>
+
+### a correct, low-level model that captures the essense of computation
+- align with the laws of physics, 
+  - theory of relativity; nothing is faster than light
+  - quantum effects; there is ultimately a cap for everything, even if that cap is really high
+- latency is impossible, but bandwidth is amenable 
+  - the world fundamentally favors bandwidth.
+- CAP is impossible, but ACID and BASE is plausible
+  - the world fundamentally favors BASE.
+  - but what about transactions? we like transactions, or we're to assume that transactions cannot exist (at least beyond some scale)?
+- do not force a specific mental model or hardware organization, and thus will not age
+  - the world is foundamentally slow or weak memory; "sequence" or "time", does not really exist in the universe.
+- sufficiently versatile to take advantage of any given special mechanisms
+  - the world is fundamentally diverse rather than unified; diversity is in its roots
+  - support existing accelerators and inspire future ones
+- PoW is fundamental, but BFT + Proof-of-sth-else (e.g. PoS) might be used as a retarded replacement
+  - the world fundamentally favors proof-of-work, because hard work is blut und eisen, because macht geht vor recht
+  - nice magic numbers: 1/3, 1/2, 2/3 - they end up in the constitution of many nations for a reason
+  - we don't need global consensus, as such consensus does not fundamentally exist in the universe, for sure
+- but we as humans are fond of an instant, ideal, unified, and ubiquitous computing experience
+
+- looks like a multi-headed turing machine with slow publisher-subscriber memory, does that capture all the communication?
+  - most attributes are on the memory - what consensus, fault-tolerance, and?
+  - that should accept the same "language" theory wise so the capability is the same with the standard one.
+  - but computing theory does not seem to help us here; it does not care about implementation properties i.e. efficiency.
+
+### a multi-dimensional recursive organization
+- for each task, a hierachy exists - not graphs but trees
+  - are hierachies a fundamental construction of the universe?
+  - i.e. are structures fundamental, or just a cognitive illusion?
+- within each hierachy, the nodes are considered to be perfect
+  - reliabilility, security and trust dimensions must be dealt with in each layer
+  - the hierachies may be different in multiple dimensions - the hierachies on each layer may conflict with each other
+
+### a meta programming language as an intermediate that captures the "intentions" of the computing task
+- not a real programming language, but should serve as a compilation target where they could compile to
+- describe intentions instead of styles, but what are "intentions"? are intentions objective, or subjective?
+- would functional programming really kick in here? a functional intermediate language?
+
+### a live JIT mechanism that maps the language to the actual implementation
+- this is, so far, the easiest; previous researches exist largely in the wild.
+- good artists copy great artists steal; we can just credit some existing some ideas.
+
+### incentives. blockchain will kick in here just fine.
 
 ## EDI Project Information
 - M10C01 R1T1
