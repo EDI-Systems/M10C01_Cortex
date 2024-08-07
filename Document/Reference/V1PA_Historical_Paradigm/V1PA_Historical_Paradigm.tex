@@ -30,73 +30,183 @@ What kinds of memory model research have we done. and what have we learned?
 
 \section{Mainframe}
 \subsection{wiki-mainframe computer\cite{mainframewiki}}
+\par
+Mainframe computers are the computers that large organizations use primarily for critical applications.
+Mainframe computers are large, but not as large as supercomputers, and have higher processing power than some other classes of computers.
+Most mainframe computer system architectures were built in the 1960s, but they continue to evolve. Mainframe computers are often used as servers.
+The term "mainframe" comes from the large cabinet, called mainframe, used to house the central processing unit and main memory of early computers.
+Later, the term mainframe was used to distinguish high-end commercial computers from less powerful machines.
+\par
+Modern mainframe designs are characterized less by raw computing speed and more by:
+Redundant internal engineering to achieve high reliability and security
+Extensive IO facilities, capable of offloading to separate engines
+Strict backward compatibility with legacy software
+Enabling high hardware and compute utilization through virtualization to support massive throughput
+Hardware hotplugging, such as processors and memory
+The high stability and reliability of mainframes enables these machines to operate uninterrupted for long periods of time, with mean time between failures measured in decades.
+\par
+Characteristics of mainframes
+Modern mainframes can run multiple different instances of the operating system simultaneously. This virtual machine technology allows applications to run as if they were on physically different computers.
+Mainframes are designed to handle very large inputs and outputs (I/O) with an emphasis on throughput calculations.
+Since the late 1950s, mainframe designs have included accessory hardware (called channels or peripheral processors) to manage I/O devices, leaving the CPU only free to handle high-speed memory.
+Mainframes also have execution integrity features for fault-tolerant computation.
+For example, z900, z990, System z9, and System z10 servers can efficiently execute result-oriented instructions twice, compare the results, arbitrate between any differences (via instruction retry and fault isolation),
+The "dynamic" workload is then offloaded to a functioning processor, including spare parts, without any impact on the operating system, applications, or users.
+This hardware-level capability, also present in HP's NonStop system, is called lock-stepping because the two processors execute their "steps" -that is, instructions -together.
+Not all applications absolutely require the guaranteed integrity provided by these systems, but many do, such as financial transaction processing.
+\par
+The difference from a supercomputer
+Supercomputers are computers at the cutting edge of data processing power, in terms of computational speed. Supercomputers are used to handle scientific and engineering problems with numbers and data (high performance computing), while mainframes focus on transaction processing.
+A transaction can refer to a set of operations, including disk reads/writes, operating system calls, or some form of data transfer from one subsystem to another, that are not measured by the processing speed of the CPU.
+Mainframes and supercomputers are not always clearly separated; Until the early 1990s, many supercomputers were based on mainframe architectures with supercomputing extensions
+
 \subsection{The mainframe is dead. Long live the mainframe!\cite{sagers2013mainframe}}
 (2013,3cite)\par
-111
+This article is short on technical details.It discusses the mainframe curriculum and talent resources in industry and academia at large, but it also gives an overview of the mainframe industry
+\par
+Large enterprise computing includes two main computing architectures.
+The first uses one or a few very large servers that provide batch processing and online transaction processing to hundreds or thousands of clients. These servers were historically referred to as mainframes
+The second and most recent architecture is to cluster many commodity servers in parallel and have them process transactions for hundreds or thousands of clients in a distributed fashion.
+\par
+Over the past few years, clusters have been touted as the logical successor to the mainframe for reasons of economics, scalability, and failover capabilities, and IBM has seen increasing sales of mainframe hardware and software.
+\par
+The authors believe that there will be greater demand for people with knowledge of mainframes, large enterprise languages, databases and systems, and integration knowledge.
+One solution is to investigate the integration of mainframe and client/server technologies, rather than redesign and rewrite legacy code in a new language on a completely different computer platform outside the mainframe.
+Newer mainframe technologies, such as IBM's WebSphere, adapt the mainframe to client/server and web environments, so there is no need to abandon the mainframe environment, which provides a stable and secure platform that allows organizations to achieve their goals.
+
+
 \subsection{Using Hadoop on the Mainframe:A Big Solution for the Challenges of Big Data \cite{seay2015using}}
 (2015,14cite)\par
-111
+In the era of cloud computing and "big data," the authors illustrate that the mainframe is still a valuable architecture. The authors argue that mainframes offer advantages over other solutions in processing large amounts of data
+\par
+The authors first discuss the framing of data, industry estimates that 20% of the world's data is "structured", or exists in some form of tabular form, but 80% of the data is "semi-structured" - social media, call centre data, text files, sensor data, etc.
+Not only does this present a challenge in volume and speed, but some method must be used to gather some meaning from a large amount of data that is independent of the formal schema that provides an indication of the meaning of the data. This ultimately leads to the need for improved analysis.
+\par
+The first challenge is to conceptually classify big data to make this task more manageable. The first logical step is to separate "sensitive, structured" data from "semi-public, semi-structured" data.
+The first category includes customer information, business transactions, etc., which typically reside in relational tables.
+The latter category includes call center data, declaration data, text files, data in XML format, social media data, and so on.
+The challenge with data in multiple formats (as mentioned above with multiple formats) is that you have to take the data from where it is, convert it to the format you want, and load it to where you want to use it.
+\par
+ETL Issues
+Extracting, Transforming, and loading (ETL) data from different systems may seem irrelevant. However, the considerable cost of ETL must be taken into account.
+1) Additional servers, storage, and network equipment needed to support file transfer and process data
+2) Manage the man-hours involved in file transfer and related data
+3) Offloading costs associated with wasted system cycles (system misuse)
+\par\par
+Why use hadoop on mainframes?
+Licensing costs for mainframe software can be minimized by implementing hadoop, an open source solution. This can affect the support and maintenance costs of the business.
+Modernizing workflows to big data open source environments expands the scope of future workflow updates, makes it easy to build systems that adapt to new technologies, and thus broadizes development methods
+\par
+Mainframes are capable of creating virtual Linux servers. These servers can run most of the available open source products, being able to put a Linux cluster running hadoop on the same host that contains large data stores in various proprietary formats.
+They can be created, moved, and removed with relative ease and with little disruption to the physical footprint of the infrastructure. As a result, if you are developing processes (i.e., applications) that can perform ETL internally, you can eliminate much of the complexity and cost of mainframe to non-mainframe ETL.
+The "use on demand" nature of the mainframe allows scaling up and down with minimal disruption to the existing infrastructure and minimal impact on the physical footprint of the infrastructure. For example, we can double or triple the number of available clusters by issuing a few commands without disrupting the network
+\par
+The authors argue that using hadoop on mainframes to analyze data can significantly reduce the cost of analytical computations and greatly improve compliance by avoiding the creation of unnecessary copies of data outside the source (mainframe) platform
+
 \subsection{The data center evolution from Mainframe to Cloud \cite{zlatanov2016data}}
 (2016,5cite)\par
-111
+Cloud computing did not kill the mainframe. While cloud computing is a disruptive technology, it has led to the evolution of mainframes.
+The big advantage of a mainframe now is that you already have one. If you do not already own one, there is little reason to invest in one, as cloud computing provides solutions that are generally more cost effective in almost all cases.
+One of the benefits of a mainframe is that you have 100\% complete control over your own data. When using cloud services, third-party companies may have access to your data. With mainframes, you don't need to worry about them snooping or touching user data. In practice, of course, it's highly unlikely that most large cloud computing companies are trustworthy.
+However, if you already have one, there are definitely reasons to keep it. The cost of shifting hundreds of thousands of lines of code can outweigh the benefits of switching to cloud computing.
+Compared to cloud services, mainframes have greater customization and specialization capabilities because the hardware itself is controlled by the user. Mainframe computers reduce the bandwidth used and can be used even when the Internet is off
+\par
+One of the problems with cloud computing is that it relies on a fairly strong Internet connection, and hopefully this connection will never go down, or it will go down as little as possible, in order to justify the cost imposed by a broken connection. But this should be a rare problem, as most businesses today stay well connected.
+\par
+The reason the mainframe market remains strong is twofold. One is lock-in - old business-critical applications running on mainframes with years of business logic built into them that cost a lot of money to migrate elsewhere.
+Another is the relevance of mainframes in modern hybrid cloud architectures. Mainframes have evolved a lot over the years to run Linux on mainframes. A lot of what these large providers are doing is actually trying to recreate the mainframe by hashing many servers together.
+
 \subsection{Metacomputing \cite{smarr1992metacomputing}}
 (1992,515cite)\par
-111
+The first phase of building the meta-computer is mainly the integration work of software and hardware, which includes interconnecting all resources with high performance networks, implementing distributed file systems, and coordinating user access across systems
+The next stage in the evolution of the metacomputer goes beyond the software integration of heterogeneous computer networks. The second phase involves scaling a single application onto multiple computers, allowing a central collection of heterogeneous computers to work together to solve a single problem. This enables users to attempt a variety of computations that would be nearly impossible without the meta-computer. Software that allows this to be done in a general way, as opposed to one-off, AD hoc solutions, has just emerged and is being evaluated and improved as users begin to use it.
+The third stage in the development of the meta-computer will be a transparent national network that will dramatically increase the computational and information resources available to applications. This phase involves more than just making remote resources available to the local metacomputer (that is, changing the distance between components). The third phase consists of setting up an appropriate WAN infrastructure and developing standards in management, file systems, and security.
+The authors take NCSA's metasystem as an example in the first stage and SIGGRAPH's paper in 1992 as an example in the beginning of the second stage, and show some achievements of metasystem in theoretical simulation, molecular virtual reality and so on
+
 \subsection{The Grid: A New Infrastructure for 21st Century Science \cite{foster2002grid}}
 (1998,5774cite)\par
-111
+A useful measure of the speed of technological change is the average time it takes for speed or capacity to double or for prices to halve. These periods are around 12, 9 and 18 months for storage, network and computing power, respectively.
+In this article, the author discusses the concept of "grid computing", arguing that the doubling of computer speeds every 18 months cannot keep up with the faster growth of storage and transfer
+The authors mentioned that authentication, authorization, and policies are the most challenging issues in the grid. Traditional security techniques mainly focus on protecting the interaction between client and server, while in grid environment, the situation is more complex and the distinction between client and server tends to disappear
+Single sign-on (users should be able to authenticate once and then assign rights to operations for computation), map to local security mechanisms (different sites may use different local security solutions, and grid security infrastructure needs to map to these local solutions on each site), Proxy credentials (these delegated actions and the authorization certificates that enable them must be carefully managed), community authorizations and policies (it is not feasible for every resource to keep track of community membership and privileges, and it is necessary to be able to express policies based on other criteria)
+
 \subsection{A Resource Management Architecture for Metacomputing Systems \cite{czajkowski1998resource}}
 (1998,929cite)\par
-111
+Meta-computing systems are designed to support remote and/or concurrent use of geographically distributed computing resources. Metacomputing systems allow applications to assemble and use collections of computing resources as needed, regardless of physical location.
+The metacomput environment introduces five challenging resource management issues: site autonomy, heterogeneous foundation, policy scalability, co-allocation, and online control
+The authors describe a resource management architecture that addresses these issues. The architecture distributes the resource management problem among different local managers, resource brokers, and resource common allocator components, and defines an extensible resource specification language to exchange information about requirements.
+\par
+The site autonomy problem refers to the fact that resources are usually owned and operated by different organizations in different administrative domains.
+The heterogeneous substrate problem originates from the site autonomy problem, which means that different sites may use different local resource management systems.
+Policy scalability issues arise because metacomputer applications come from a wide range of domains, each with its own requirements;
+The co-allocation problem arises because the resource requirements of many applications can only be met by using resources simultaneously at several sites. Site autonomy and the possibility of failures during the allocation process lead to the need for specialized mechanisms to allocate multiple resources.
+Online control problems arise because a lot of negotiation may be required to adapt application requirements to resource availability, especially when requirements and resource characteristics change during execution;
+\par
+Prior work on resource management in metacomputer systems can be divided into two broad categories:
+Network batch queuing system. These systems strictly focus on the problem of resource management for a group of networked computers. Batch scheduling systems provide a limited form of policy scalability
+Wide area scheduling system. Here, resource management is performed as a component that maps application components to resources and schedules their execution. So far, these systems do not address the issues of heterogeneous substrates, site autonomy, and co-allocation.
+\par
+This paper defines a resource specification language (RSL) to communicate resource requests between components, and constructs a multi-tier resource architecture (from application to resource broker, to resource co-allocator and resource manager).
+The resource agent is responsible for taking the high-level RSL specification and transforming it into a more specific specification through a process the authors call specialization
+Such ground requests can be passed to the common allocator, which coordinates resource allocation and management across multiple sites
+The resource co-allocator decomposes multiple requests into their constituent elements and passes each component to the appropriate resource manager
+
 \subsection{The Harness Metacomputing Framework
 \cite{migliardi1999harness}}
 (1999,45cite)\par
-111
+Harness is an experimental meta-computing framework that is based on the principle of dynamic reconfiguration, not only for the computers and networks that compose a virtual machine, but also for the functionality of the virtual machine itself. This fundamental feature of Harness aims to address the inflexibility of current metacomponent frameworks and their inability to incorporate new technologies and avoid rapid obsolescence
+Distributed and cluster computing technologies often change with new machine capabilities, interconnection network types, protocols, and application requirements, and the underlying middleware either needs to be changed or rebuilt, increasing the amount of effort involved and hindering interoperability.
+\par
+This framework supports reconfiguring the computers and networks that make up the virtual machine, as well as reconfiguring the functionality of the virtual machine itself. These characteristics can be modified under user control through a "plug-in" mechanism that serves as a central feature of the system, providing a virtual machine environment that can be dynamically adapted to meet application requirements
+The basic abstraction in the Harness meta-computing framework is the Distributed Virtual Machine (DVM). Users can configure, join or leave the DVM by means of plug-ins
+\par\par
+Related work:
+PVM is one of the first systems to propose the concept of meta-computing in concrete virtual machine and programming environment terms and to explore heterogeneous network computing. PVM is based on the concept of a dynamic, user-specified pool of hosts on which software simulates generic concurrent computing resources.
+Dynamic process management combined with strongly typed heterogeneous message passing in PVM provides an efficient environment for distributed memory parallel programs. However, PVM lacks flexibility in a number of ways, which may limit the development of the next generation of meta-computing and collaborative applications. For example, multiple DVM merging and splitting is not supported. Two different users cannot interact, collaborate, and share resources and programs in an active PVM machine. PVM uses Internet protocols, which may preclude the use of specialized network hardware
+Legion is a meta-computing system that can accommodate a heterogeneous combination of geographically distributed high performance machines and workstations. Legion is an object-oriented system with a focus on providing transparent access to enterprise-class distributed computing frameworks. As such, it does not attempt to cater to changing requirements and is relatively static in both the types of computational models and implementations it supports.
+Globus is a meta-computing infrastructure built on top of the "Nexus" communication framework. The Globus system is designed around the concept of a toolkit consisting of predefined modules related to communication, resource allocation, data, etc. However, the assembly of these modules should not happen dynamically at runtime as in Harness.
+Almost all of the above projects envisage a model in which very high performance modules are statically connected to build a larger system. One of the main ideas of the Harness project is to trade some efficiency by dynamically connecting, disconnecting, and reconfiguring heterogeneous components for enhanced global availability, upgradability, and failure resilience.
+
 \subsection{MapReduce: Simplified Data Processing on Large Clusters \cite{dean2008mapreduce}}
 (2008,22998cite)\par
-111
+This is an effort by Google, MapReduce is a programming model and associative implementation for processing and generating large-scale datasets. The user defines the Map function to process the input data and generate a set of intermediate key-value pairs, and then defines the Reduce function to process these intermediate key-value pairs.
+MapReduce automatically handles data partitioning, distribution, and failure recovery, allowing programs to run efficiently in distributed systems.
+\par
+The authors design a new abstraction that allows the user to express the simple computation that is trying to be performed, but hides the messy details of parallelization, fault tolerance, data distribution, and load balancing in the library.
+The authors explain that most computations involve applying a map operation to each logical record in the input to compute a set of intermediate key-value pairs, and then applying a reduce operation to all values sharing the same key in order to properly combine the derived data. Using a functional model with user-specified map and reduce operations enables easy parallelization of large computations and uses reexecution as the primary mechanism for fault tolerance.
+The main contribution of this work is a simple yet powerful interface that enables automatic parallelization and distribution of large-scale computations, combined with the implementation of this interface to achieve high performance on large commodity pc clusters. The programming model can also be used to parallelize computations among multiple cores on the same machine.
+\par
+The MapReduce library in the user program starts by splitting the input file into M chunks, each of which is typically 16-64MB in size (controlled by the user via optional parameters). It then launches many copies of the program on a set of machines.
+One copy of the program, master, is special. The rest is for the master to assign the work. There are M map tasks and R reduce tasks to allocate.
+The worker thread assigned the mapping task reads the contents of the corresponding input split. It parses key-value pairs from the input data and passes each pair to a user-defined map function, which produces intermediate key-value pairs that are buffered in memory.
+The buffer pairs are periodically written to the local disk and divided into R regions by the partitioning function. The locations of these buffer pairs on the local disk are passed back to the master server, which is responsible for forwarding these locations to the reduce worker
+When the master informs the reduce worker about these locations, it reads the buffered data from the map worker's local disk using a remote procedure call. When the reduce worker has read all the intermediate data for its partition, it sorts the data by the intermediate key in order to group together all the occurrences of the same key
+The reduce worker iterates over the sorted intermediate data, and for each unique intermediate key it encounters, it passes the key and the corresponding set of intermediate values to the user's reduce function. The output of the reduce function is appended to the final output file of this reduce partition
+The main program wakes up the user program. At this point, the MapReduce call in the user program returns to the user code
+\par
+Extending functionality
+User-specified partitioning function to determine the mapping of intermediate keys to R reduce shards
+Ordering guarantee: Our implementation guarantees that in each R reduce partition, intermediate key/value pairs are processed in increasing key order
+User-specified composition function to partially combine intermediate values generated using the same key in the same map task (to reduce the amount of intermediate data that must be transferred over the network)
+Custom input and output types for reading new input formats and producing new output formats
+Mode of execution on a single machine to simplify debugging and small-scale testing.
+
 \subsection{Apache Hadoop YARN: Yet Another Resource Negotiator \cite{vavilapalli2013apache}}
 (2013,2852cite)\par
-111
-%-----------------------------------------------------
-\chapter{Supercomputer research}
-\section{Introcuction}
-\section{Supercomputer}
-\subsection{High Performance Computing- History of the Supercomputer\cite{probert2013high}}
-(2013,2cite)\par
-111
-\subsection{The CRAY-1 Computer System\cite{russell1978cray}}
-(1978,1130cite)\par
-111
-\subsection{Reevaluating Amdahl's Law\cite{gustafson1988reevaluating}}
-(1988,2666cite)\par
-111
-\subsection{What’s Next in High-Performance Computing\cite{bell2002s}}
-(2002,185cite)\par
-111
-\subsection{High-Performance Computing: Clusters, Constellations, MPPs, and Future Directions\cite{dongarra2005high}}
-(2005,158cite)\par
-111
-\subsection{Distributed Shared Memory: Concepts and Systems \cite{protic1996distributed}}
-(1996,398cite)\par
-111
+Apache Hadoop was originally one of many open source implementations of MapReduce. Developers often work around the limitations of the MapReduce API by using clever works to get the most out of their physical resources.
+These limitations and misuses have inspired an entire class of papers that use Hadoop as a benchmark for unrelated environments. By now, the limitations of the original Hadoop architecture are well understood by both academic and open source communities
 \par
-\subsection{Exascale Computing Trends: Adjusting to the “New Normal” for Computer Architecture \cite{kogge2013exascale}}
-(2013,141cite)\par
-111
-\subsection{Computing beyond Moore’s Law
-\cite{shalf2015computing}}
-(2015,265cite)\par
-111
-\subsection{GPU Cluster for High Performance Computing \cite{fan2004gpu}}
-(2004,748cite)\par
-111
-\subsection{Hybrid CUDA, OpenMP, and MPI parallel programming on multicore GPU clusters \cite{yang2011hybrid}}
-(2011,200cite)\par
-111
-\subsection{Cluster, grid and cloud computing: A detailed comparison \cite{sadashiv2011cluster}}
-(2011,308cite)\par
-111
+The authors introduce YARN, a next-generation Hadoop computing platform that, unlike the familiar monolithic architecture, delegates many scheduling-related functions to each job component by separating resource management functions from the programming model. In this new context, MapReduce is just one of the applications running on top of YARN. This separation provides a great deal of flexibility in the choice of programming framework
+\par
+YARN is composed of a resource manager, a node manager, an application manager, and containers. The resource manager allocates resources, the node manager processes nodes and monitors their resource usage, and the container contains a collection of physical resources
+The ResourceManager (RM) of each cluster tracks resource usage and node activity, enacts allocation invariants, and arbitrates contention among tenants. Running as a daemon on a dedicated machine, it acts as a resource arbitration center between the various competing applications in the cluster. It can enforce properties such as fairness, capacity, and locality across tenants. The RM dynamically assigns leases, called containers, to specific nodes based on application requirements, scheduling priorities, and resource availability
+\par
+The ApplicationMaster (AM) coordinates the logical plan of a single job by requesting resources from the RM, generating a physical plan from the resources it receives, and coordinating the execution of this plan around failures.
+To execute and track these allocations, the RM interacts with a special system daemon called NodeManager (NM) running on each node. The communication between RM and NMs is heartbeat-based to achieve scalability. The NMs is responsible for monitoring resource availability, reporting failures, and container lifecycle management.
+\par
+When a certain job is generated, the job is submitted to the RM through a common submission protocol and goes through an admission control phase where security credentials are verified and various operational and administrative checks are performed. Accepted jobs are passed to the scheduler to be run. Once the scheduler has enough resources, the application moves from accepting to running state. Allocate a container for AM and generate it on a node in the cluster. Records of accepted applications are written to persistent storage and recovered upon RM restarts or failures.
+Applicatio nMaster is the "head" of the job and manages all lifecycle aspects, including dynamically increasing and decreasing resource consumption, managing execution flow (e.g., running reducers based on mapped outputs), handling failures and computation skew, and performing other local optimizations. Indeed, AM can run arbitrary user code and can be written in any programming language, since all communications with RM and NM are encoded using extensible communication protocols
+To acquire the container, AM makes a resource request to RM. When allocating a resource on behalf of an AM, the RM generates a lease for that resource, which is extracted by subsequent AM heartbeats. When AM submits a container lease to NM, the token-based security mechanism guarantees its authenticity
 \subsection{Bigtable: A Distributed Storage System for Structured Data \cite{chang2008bigtable}}
 (2008,8061cite)\par
 The author designs, implements and deploys a distributed storage system
@@ -111,7 +221,7 @@ Finally, Bigtable schema  parameters let clients dynamically control whether to 
 A Bigtable cluster is a set of processes that run the Bigtable software. Each cluster serves a set of tables. A table in Bigtable is a sparse, distributed, persistent multidimensional sorted map. Data is organized into three dimensions: rows, columns, and timestamps.
 We refer to the storage referenced by a particular row key, column key, and timestamp as a cell. Rows are grouped together to form the unit of load balancing, and columns are grouped together to form the unit of access control and resource accounting.
 \par
-Lessons learned：\par
+Lessons learned:\par
 One lesson we learned is that large distributed systems are vulnerable to many types of failures, not just the standard network partitions and fail-stop failures assumed in many distributed protocols. 
 Another lesson we learned is that it is important to delay adding new features until it is clear how the new features will be used.
 The most important lesson we learned is the value of simple designs. Given both the size of our system (about 100,000 lines of non-test code), as well as the fact that code evolves over time in unexpected ways, we have found that code and design clarity are of immense help in code maintenance and debugging.
@@ -178,26 +288,401 @@ As others have pointed out, it is possible to exceed the performance of existing
 Like C-Store, Vertica physically organizes table data into projections, which are sorted subsets of the attributes of a table. 
 
 
+
+%-----------------------------------------------------
+\chapter{Supercomputer research}
+\section{Introcuction}
+\section{Supercomputer}
+\subsection{High Performance Computing- History of the Supercomputer\cite{probert2013high}}
+(2013,2cite)\par
+Early days
+
+1943 Colossus was the first programmable digital electronic computer. It was secretly designed during World War II to break codes and had little influence on subsequent computers
+The 1945 Manchester Mark I was significant because it was the first machine to use index registers to modify the base address
+
+1950 The MIT Whirlwind was the first computer to run in real time and use video display for output (the previous ones were batch computers). In response to this need, core memory (ferrite rings that store data in the polarity of the magnetic field) was created.
+
+The 1960 LARC was the first true supercomputer, and it was designed for multiprocessing
+
+1961 7030 IBM used a number of creative initiatives to beat LARC designs, such as multiple programming, memory protection, generalized interrupts, 8-bit bytes, instruction pipeline, prefetching and decoding, and memory interlacing
+
+1965 The CDC 6600 was 10 times faster than the fastest computer of the day, the first RISC system, with 10 peripheral processors to handle IO and run the operating system
+
+Vector epoch
+
+The 1974 CDC Star-100 was one of the first machines to use a vector processor, and in order to improve vector performance at the expense of basic scalar performance, the machine is generally considered a failure.
+
+1975 Cray-1 Vector processor that uses vector registers instead of pipelining memory operations without affecting scalar performance. Comes with Cray operating system, Cray assembly language, and Cray FORTRAN, the first FORTRAN compiler for automatic vectorization
+
+1981 CDC Cyber-205 corrected the Star-100 error, using semiconductor memory and virtual memory concepts
+
+1983 Cray X-MP parallel vector processor machine with better link support, parallel arithmetic pipeline, and shared memory access with multiple pipelines per processor.
+
+Traditional Era 1991-2010
+
+1995 Intel ASCI Red 2.15 TFLOPS
+
+2000 IBM ASCI White 7.226 TFLOPS
+
+2002 Earth Simulator 35.86 TFLOPS
+
+2005 IBM ASCI Blue Gene 70 -478 TFLOPS
+
+2008 IBM Roadrunner 1.105 PFLOPS
+
+2009 Cray Jaguar 1.75 PFLOPS
+
+GPU Era 2011-present
+
+2010 Tianhe-1A 2.57 PFLOPS
+
+2011 Fujitsu K computer 8.2 -- 10.5 PFLOPS
+
+2012 IBM Sequoia 20.1 PFLOPS
+
+2013 Tianhe-2 54.9 PFLOPS
+
+2015 Sunway TaihuLight 125.4 PFLOPS
+
+2018 Summit 187.6 PFLOPS
+
+2020 Fugaku 415.5 PFLOPS
+
+2022 Frontier 1102 PFLOPS
+
+\subsection{The CRAY-1 Computer System\cite{russell1978cray}}
+(1978,1130cite)\par
+The most successful supercomputer in history can support 138 million floating-point operations per second (MFLOPS) over a sustained period of time.
+
+Through a technique called linking, CRAY-1 vector function units were combined with scalar and vector registers to produce temporary results and use them again immediately without the need for additional memory references, which slowed down the computation process in other computer systems of the time.
+
+Using the chaining technique, when a result issued from one functional unit is immediately fed (at a rate of one/clock cycle) to another functional unit, and so on. In other words, intermediate results do not have to be stored in memory and can even be used before the vector operation that created them is run.
+
+Linking is similar to the "data forwarding" technique used in IBM computers. Like data forwarding, linking is done automatically.
+
+The features that enhanced the CRY-1's computing power were: its small size (the base was about 0.5 m tall and the diameter was about 2.5 m, and the main body was less than 2 m and the diameter was about 1.5 m), which reduced the distance that electrical signals had to travel within the computer frame, and allowed for a clock cycle of 12.5 nanoseconds, having the fastest scalar processor in the world at the time. 1 million word semiconductor memory (SECD~D) with error detection and correction logic, with 64 bit word length, and its optimized Fortran compiler.
+\subsection{Reevaluating Amdahl's Law\cite{gustafson1988reevaluating}}
+(1988,2666cite)\par
+Amdahl's Law:
+It takes time T1 before optimization, and time Tn after optimization. F is the serial ratio in the program, then (1-f) is the parallel ratio, so the speedup ratio is T1/Tn. The speedup ratio s=1/(F+(1-f)/n) is simplified by using Tn=T1(F+(1-f)/n).
+
+It can be seen from the formula of "speedup ratio" that simply increasing the number of processors does not necessarily improve the performance of the system effectively. Only under the premise of increasing the proportion of parallel modules in the system and increasing the number of processors reasonably, the maximum speedup ratio can be obtained with the minimum investment
+\par
+Based on this, the authors formulate Gustafson's Law:
+Note that a is the serial time, b is the parallel time, n is the number of processors, then the speedup ratio s=(a+nb)/(a+b), since the serial ratio F=a/(a+b), s= n-f (n-1) after transformation.
+
+We can see that F (the degree of serialization) is small enough, that is, parallelized enough, and the speedup is proportional to the number of cpus. It also shows the previous relationship between the number of processors, the serial ratio, and the speedup ratio, but it focuses on a different Angle.
+
+These two laws are important in highly concurrent programs and contribute significantly to the theoretical foundation of parallel computing.
+\subsection{What’s Next in High-Performance Computing\cite{bell2002s}}
+(2002,185cite)\par
+There are two main supercomputer architectures: Cray vector supercomputer cluster; As well as scalar single and multiprocessor clusters. Clusters are transitioning from massively parallel computers and clusters running proprietary software to proprietary clusters running standard software, as well as do-it-yourself Beowulf clusters built from commodity hardware and software.
+It builds on decades of parallel processing research and many attempts to apply loosely coupled computers to a variety of applications. Some components include: Message Passing Interface (MPI) programming model; Parallel virtual machine (PVM) programming, execution and debugging model; Parallel file system; Tools for configuring, scheduling, managing, and adapting parallel applications High-level libraries such as Linpack, BLAS.
+The downside of Beowulf commodity clusters is that they do not perform well on applications that require large amounts of shared memory.
+\subsection{High-Performance Computing: Clusters, Constellations, MPPs, and Future Directions\cite{dongarra2005high}}
+(2005,158cite)\par
+Improving and modifying the concept of cluster given in the previous article, the scope of the definition of cluster is limited to a parallel computer system composed of an integrated collection of independent nodes, each of which is an independent system, capable of operating independently, and derived from products developed and marketed for other independent purposes
+For example, cluster-NOW systems are almost entirely programmed using the Message Passing Interface (MPI), while constellation systems may be at least partially programmed using OpenMP, using the threading model. Typically, the constellation is space-shared rather than time-shared, and each user has its own node; The space sharing clusterNOW system implies the allocation of a certain number of nodes to a particular user.
+Four main dimensions describing parallel computing systems are emphasized: clustering, namespaces, parallelism, and latency and locality management
+\subsection{Distributed Shared Memory: Concepts and Systems \cite{protic1996distributed}}
+(1996,398cite)\par
+The memory system organization of multiprocessor systems is usually divided into two categories: shared memory systems and distributed memory systems.
+Shared memory systems, often referred to as tightly coupled multiprocessors, give all processors equal access to global physical memory.
+
+It is simple and portable. However, shared-memory multiprocessors usually suffer from increased contention and extended latency when accessing shared memory. Distributed storage systems, often referred to as multicomputers, consist of multiple independent processing nodes and local storage modules, connected by a general interconnection network. Problems also arise due to the need to deal with data distribution and management communication across systems, as well as process migration. Therefore, the hardware problems are easier and the software problems are more complex in distributed memory systems compared to shared memory systems.
+
+Distributed shared memory combines the advantages of both approaches.
+
+DSM systems logically implement the shared memory model on top of physically distributed memory systems. There are various ways in which system designers can implement specific mechanisms that implement shared memory abstractions in hardware or software.
+
+DSM system General structure DSM systems generally consist of a set of nodes or clusters, connected through an interconnected network. The cluster itself can be a uniprocessor or multiprocessor system, usually organized around a shared bus.
+
+Two common strategies used to distribute shared data are replication and migration. Replication allows multiple copies of the same data item to reside in different local memory (or caches). It is mainly used to enable simultaneous access to the same data by different sites, mainly when read sharing is prevalent. Migration means that only one copy of the data item exists at any time, so the data item must be moved to the requesting site for exclusive use. In order to reduce the consistency management overhead, users prefer this strategy when sequential write sharing mode is generally adopted. The system designer must choose a DSM algorithm that is well adapted to the system configuration and characteristics of memory references in typical applications
+
+\par
+\subsection{Exascale Computing Trends: Adjusting to the “New Normal” for Computer Architecture \cite{kogge2013exascale}}
+(2013,141cite)\par
+Sustained performance (in floating-point operations per second) has been increasing consistently at a rate of ~ 1.9x per year for almost two decades.
+Before 2004, this growth came from a modest increase in the number of cores, combined with a large increase in the kernel clock rate of 50\% or more per year, and a large increase in memory per core. But after 2004, the annual kernel growth rate skyrocketed, while the average kernel clock growth rate disappeared, and the memory per core even dropped.
+\par
+Using terms first introduced in the exascale Technical report, these terms include heavyweight, lightweight, and more recent hybrids.
+Heavyweight architectures are natural descendants of pre-2004 systems that have one or more traditional high-end multicore microprocessor chips, often with various support chips connected to relatively large numbers of traditional DRAM memory dual inline memory modules (DIMMs), and chips that perform out-node communication and routing. Typically, compute and routing chips operate at very high clock rates and require large (and "heavy") heat sinks to keep them cool. The chips in modern heavyweight processor sockets have 8 to 16 cores, each with 2 to 4 Fpus, running at around 3ghz.
+Lightweight architectures started with IBM Blue Gene/L2 in 2004; It has dual processor cores that integrate a memory controller and I/O and routing functions on a single chip. These cores are much simpler and run at a much lower clock rate than cores on scale machines. Such chips, when combined with memory, constitute a complete node, and two such nodes are packaged on small cards, plugged into the motherboard, and connected to each other. Subsequent versions, Blue Gene/P3 and now Blue Gene/Q,4 have continued this type of architecture.
+
+A third category has emerged; It combines a heavyweight processor with a second chip with a large number of simpler cores, typically with more Fpus per core, originating from the gpu. These accelerators are connected to local high-speed, low-density memories to hold all the data they process and need to be transferred between heavyweight memories
+
+In essence, even homogeneous hardware will become increasingly heterogeneous in future technology generations. As a result, homogeneity can no longer be relied upon, which poses existential challenges to the batch synchronous execution model.
+
+\subsection{Computing beyond Moore’s Law
+\cite{shalf2015computing}}
+(2015,265cite)\par
+The end of Moore's law will challenge the packaging and performance of a variety of consumer electronic devices that rely on cost and energy efficiency gains to squeeze more functionality out of the device when battery capacity or power is limited. If the smartphone industry cannot accommodate more features in a smaller space, the smart capabilities of smartphones will suffer.
+\par
+A deeper problem is the threat to the growth of the American computer industry.
+\par
+Moore's Law turned computing into a pervasive consumer technology, becoming increasingly powerful in an exponentially growing market. The end of this scale could slow the pace of product improvement, which could have a significant negative impact on the economy.
+These challenges have prompted researchers to take a broader view of what constitutes computing. A recent report commissioned by the Intelligence Advanced Research Projects Activity (IARPA), Preliminary Perspectives on Alternative Computing Technologies for the Intelligence Community, recommends the study of four basic computing models:
+Classical Digital Computing (CDC), which includes all binary numbers that form the basis of the computing and consumer electronics industries
+Electronic analog computing (AC), including non-binary devices that implement computation through direct physical principles
+Neuro-inspired computing (NC), which includes devices based on brain operating principles and general neuronal computing
+Quantum computing (QC), in theory, can solve some problems of combinatorial complexity by selecting the desired state from the superposition of all possible answers to the problem.
+Neuro-inspired computing (NC), including devices based on brain operating principles and general neuronal computing; Quantum computing (QC), in theory, can solve some problems of combinatorial complexity by selecting the desired state from the superposition of all possible answers to the problem.
+Architectural and software advances: energy management (fine-grained power management may offer additional potential to recover energy), circuit design (can enable wires to be connected over long distances at lower voltages followed by efficient re-amplification at endpoints, although re-amplification causes some loss), system-on-chip (SoC) specialization, custom logic, near-threshold voltage operation
+\subsection{GPU Cluster for High Performance Computing \cite{fan2004gpu}}
+(2004,748cite)\par
+Driven by the gaming industry, GPU performance has been doubling roughly every 6 months since the mid-1990s, which is much faster than the average doubling of CPU performance every 18 months (Moore's Law), and this trend is expected to continue.
+The authors argue that GPU clusters are promising for data-intensive scientific computing and can greatly outperform CPU clusters at comparable cost
+The authors of this article were the first to develop a scalable GPU cluster for high performance scientific computing and large-scale simulation, setting up a cluster with 32 compute nodes connected by a 1 Gigabit Ethernet switch.
+\par
+As an example application, the authors simulated the diffusion of air pollutants in The Times Square area of New York City.
+The authors explain how Gpus can be used for non-graphical computations, introduce the LBM model for simulating gases and fluids, and show how to extend the LBM model to GPU clusters
+According to him, the main challenge in scaling LBM computation to GPU clusters is minimizing communication cost -network communication and time spent transferring data between GPU and PC memory.
+The experimental results show that :(1) in the process of sending data from one node to another node, if the third node tries to send data to any of the nodes, the outage will destroy the smooth transmission of data and may significantly reduce the performance
+(2) Assuming the same amount of total communication data, the simulation in which each node transmits data to more neighbors consumes more communication time than each node transmits data to fewer neighbors.
+In this problem, the authors design the communication schedule to optimize these problems.
+\par
+He explained that it would take several hours for a conventional supercomputer or cluster to solve a 1.6km × 1.5km area with a grid spacing of 10m
+In contrast, the authors' approach contains a more detailed model of the city and can simulate The Times Square area of New York City with a grid spacing of 3.8 m in less than 20 minutes.
+\par
+The authors concluded that due to network limitations, the advantage of GPU clusters over CPU clusters gradually decreases when the number of network nodes in the cluster increases
+Many types of computation have been ported to Gpus, but they are limited by the inability to efficiently handle complex data structures and complex control flows. One way to solve this problem is to have Gpus and cpus work together, each doing what they do best.
+\subsection{Hybrid CUDA, OpenMP, and MPI parallel programming on multicore GPU clusters \cite{yang2011hybrid}}
+(2011,200cite)\par
+NVIDIA's CUDA is a general purpose scalable parallel programming model for writing highly parallel applications. It provides several key abstracts-hierarchy of thread blocks, shared memory, and barrier synchronization.
+The authors propose a solution that simplifies the use of hardware acceleration in traditional general-purpose applications while maintaining the portability of application code. A parallel programming method using hybrid CUDA, OpenMP and MPI programming is proposed
+And a general method using the performance function to estimate the performance weight of each node is proposed, and a hybrid CUDA cluster is constructed for verification. Experimental results show that the proposed method outperforms all previous schemes in the hybrid CUDA cluster environment.
+CUDA A parallel computing architecture developed by NVIDIA, the computing engine in NVIDIA graphics processing units or Gpus, which is accessible to software developers through industry standard programming languages
+These abstractions provide parallelism at the granularity of both, leading the programmer to divide the problem into coarse subproblems that can be solved independently and in parallel, and then into fine subproblems that can be solved collaboratively in parallel.
+\par
+\par
+OpenMP is a shared memory architecture API that provides multithreading capabilities. Is an open specification of shared-memory parallelism. By using OpenMP, it is possible to write parallel programs that can run efficiently on multi-core, multiprocessor computers.
+\par
+\par
+The MPI Message Passing Interface (MPI) is the specification of message passing operations. It defines each worker as a process. MPI is currently the de facto standard for developing high performance computing applications on distributed memory architectures.
+Portability, standardization, performance, and functionality are provided, and point-to-point messaging and global operations are included
+MPI libraries are often used for parallel programming in cluster systems because it is a message-passing programming language. Is not the best programming language for multicore computers
+\par
+OpenMP: thread-level (parallel granularity), shared memory, poor scalability, suitable for multiprocessors
+MPI: process-level, distributed storage, good scalability, suitable for clusters
+\subsection{Cluster, grid and cloud computing: A detailed comparison \cite{sadashiv2011cluster}}
+(2011,308cite)\par
+The need for small-scale and low-cost high performance computing (HPC) leads to the emergence of cluster computing.
+\par
+Grid computing originated in academia in the mid-1990s to facilitate users to remotely utilize idle computing power when local computing centers are busy.
+After years of development, grid has become an effective way to coordinate resource sharing and problem solving in dynamic multi-agency virtual organizations.
+\par
+Cloud computing is a computing model that emerged around the end of 2007. It provides a pool of computing resources that users can access through the Internet.
+The basic principle of cloud computing is to transfer computing from local computers to the network, which allows enterprises to use the required resources without having to invest heavily in purchasing maintenance and other aspects, eliminating overprovisioning and improving resource utilization
+\par
+\par
+Cluster computing
+Cluster computing is intended to replace the alternative proposed by supercomputers, and clusters are mainly used for high availability, load balancing, and computing purposes
+High availability refers to the fact that redundant nodes are maintained, load balancing refers to the fact that user requirements are received and distributed to all independent machines, so that computing work is balanced between different machines, and clusters are usually used primarily for computing purposes, rather than to handle IO-based activities
+Grid computing
+Grid computing groups computers from multiple administrative domains together to achieve a common goal, solving a single task
+A parallel distributed system that can dynamically share, select, and aggregate geographically distributed autonomous resources at runtime, on demand
+Cloud computing
+It refers both to the applications delivered as services over the Internet and to the hardware and system software that provide these services in data centers
+A cloud is a parallel and distributed system consisting of a set of interconnected virtualized computers that are dynamically provisioned and rendered as one or more uniform computing resources based on service level agreements.
+It can be quickly configured and published through service provider interaction
+\par
+The Challenges of Cluster Computing
+Middleware: Generates software environments that provide the illusion of a single system image rather than a collection of independent computers
+Program: An application running on a cluster must be explicitly written that contains a division of tasks between nodes, and attention should be paid to communication between nodes.
+Elasticity: The variation in real-time response time when the number of service requests changes dramatically
+Scalability: Additional demands on resources are met, thus affecting the performance of the system
+Applications of cluster computing
+Weather research and forecasting, using a Hadoop cluster to analyze customer search patterns for targeted advertising, filtering and indexing web listings, and more
+It is also used to solve major challenging applications such as car crash simulation, data mining, aerodynamics, and astrophysics.
+Clusters are used as a platform for data mining applications involving computation and data intensive operations. They are also used in commercial applications such as the banking sector to achieve high availability and backup
+\subsection{Reinventing High Performance Computing: Challenges and Opportunities\cite{reed2022reinventing}}
+(2022,37cite)\par
+
+A brief review of the history of computing in general and high performance computing in particular is provided
+
+The dramatic economic and technological changes taking place in cloud computing are discussed
+
+The semiconductor issues driving the adoption of multi-chip modules, aka small chips, are discussed
+
+The current technological and economic situation is summarized
+
+We evaluate potential future directions for cutting-edge scientific computing
+
+In the second half of the 1970s, the introduction of vector computer systems, represented by Cray-1, marked the beginning of modern supercomputing. These systems offered at least an order of magnitude performance advantage over the conventional systems available at the time, and raw hardware performance was the main, if not the only, selling point
+
+In the first half of the 1980s, the integration of vector systems in traditional computing environments became more important in the US market. The surviving manufacturers began to offer standard programming environments, widely used operating systems, such as variants of Unix, and key applications, allowing them to attract customers from the wider industrial market. The performance is mainly improved by improving chip technology and producing shared-memory multiprocessor (SMP) systems.
+
+In the early 2000s, Beowulf clusters built using off-the-shelf components gained importance as computing platforms for academic research objects and end users of HPC computing systems.
+Since 2005, Graphics Processing Units (Gpus), primarily developed by NVidia, have become a powerful platform for high performance computing and have been successfully used to accelerate many scientific workloads.
+
+The authors propose some guidelines for today's high performance computing
+
+Semiconductor constraints dictate new approaches. Academic, government, and industry collaborations are needed to establish interoperability standards. Only the use of open chip standards can effectively integrate the best ideas from multiple sources in an innovative way to develop next-generation HPC architectures.
+
+End-to-end hardware/software co-design is critical. It means looking at the problem space as a whole and then envisioning, designing, testing and manufacturing appropriate solutions
+
+
+\subsection{Status, challenges and trends of data-intensive supercomputing\cite{wei2022status}}
+(2023,7cite)\par
+
+supercomputing has progressed from being oriented towards computationally intensive tasks, to being oriented towards a hybrid of computationally and data-intensive tasks. Driven by the continuous development of high performance data analytics (HPDA) applications—such as big data, deep learning, and other intelligent tasks—supercomputing storage systems are facing challenges such as a sudden increase in data volume for computational processing tasks, increased and diversified computing power of supercomputing systems, and higher reliability and availability requirements.
+
+The traditional supercomputing aims to increase the number of floating point operations per second, focusing on computational performance, programmability, scalability, energy efficiency and other issues, and is dedicated to handling computationally intensive tasks.
+With the technological development of hardware and software for supercomputing and the change in demand for supercomputing applications caused by social progress, the role played by supercomputing is also changing. The data generated by typical HPC applications such as earthquake prediction, oil exploration, and climate analysis are growing explosively, and are characterized by volume, velocity, and variability, which are typical big data scenarios. On the other hand, AI technology is being used in various HPC scenarios—such as deep learning-based climate analysis and earthquake simulations
+
+The future development trend of supercomputing platforms is focused on the explosive increasing volume of data for computational processing tasks, diversification of computing power, higher reliability and availability requirements, and deeper integration of supercomputing centers with data and intelligent computing centers.
+
+Through analysis of the characteristics of data-intensive applications and the development of supercomputing, we argue that storage systems for supercomputers need to focus on the following key issues.
+
+– Complex data-type supporting problems. HPDA applications have complex data types, including structured data, semi-structured data, and unstructured data. The datasets may consist of large files, or many small files. How should the platform handle different types and sizes of data to fully utilize the platform’s computational potential is a key challenge.
+
+– Mixed-load optimization problems. How to ensure that the storage system performs well under various HPDA application workloads.
+
+– Multiprotocol support and interoperability issues.
+
+Supercomputer can usually be divided into five categories: parallel vector processors (PVP), symmetric multiprocessors (SMP), massively parallel processors (MPP), distributed shared storage multiprocessors (DSM) and clusters
+
+Trends in Data Intensive Supercomputing
+
+Multiple Computing Power. Break away from traditional architecture design, and solve the compatibility and efficiency problems caused by multiple computing devices with different architectures. It should be able to achieve efficient aggregation and on-demand definition of multiple computing powers, implement storage and computing decoupling technology to improve flexibility, realize the combination of computing and data to break the upper limit of storage, and to achieve scalability through open and interconnected network technology. Supercomputers should adopt an open network chip with an open architecture so that it can support current mainstream network chips. It should have an open network operating system to improve the flexibility of computing power and to meet the needs of cloud computing in terms of interfaces, software definitions, and rapid iterations of the network.
+
+EB Level Storage. Enhanced Bandwidth and I/O Performance. Efficient Data Analysis and Management Capabilities. More Convenient Programming Models and Heterogeneous Programming. Intelligent Scheduling. High Reliability and High Availability Mechanisms. Data Privacy and Security Mechanisms. Multi Protocol Access Interface. Better Support for Artificial Intelligence Applications. 
+
+
+
+\subsection{November 2022 Top500 List Overview\cite{abramov2023november}}
+(2022,3cite)\par
+
+from the “petascale era” to the “exascale era”
+
+the performance milestones were overcome: 1 Mflops (106 flops) in 1975, 1 Gflops (109 flops) in 1986, 1 Tflops (1012 flops) in 1997, and 1 Pflops (1015 flops) in 2008. If this trend had persisted, a performance of 1 Eflops (1018 flops) would have been achieved in 2019. However, it was achieved in June 2022.
+
+Starting from 2008, the rate of growth of achieved maximum performance has clearly changed: instead of an increase of “1000 times in 11 years”, we now have an increase of “1000 times in 13–17 years”.
+
+Undoubtedly, at the turn of 2008 the world supercomputing industry faced scientific and technical difficulties on the path of SCT development. This led to a review of future performance milestones: 1 Eflops (1018 flops) was achieved in June 2022, and one can expect 1 Zflops (1021 flops) to be achieved in 2035–2039.
+
+In this paper, in addition to analyzing the development trend of supercomputer computing power in recent years and the introduction of the top computers, we also discuss the problem of hybrid architecture.
+Hybrid supercomputers are systems in which computing nodes are equipped with specialized processors, called accelerators, in addition to standard processors. The idea of accelerators in the supercomputing field has been around for a long time, but hybrid architectures have only become widely adopted in the last decade. 
+
+Analysis of hybrid architectures in the Top500 rankings indicates that the contribution of hybrid architectures to the overall performance of the Top500 has grown and reached 63.8 \% . Among the current solutions for hybrid systems, notable accelerators include AMD (31.4 \% ) and NVIDIA (30.9 \%). Interesting new solutions also deserve attention (5.4 \%  in 2018) 
+
+
+\subsection{The landscape of exascale research: A data-driven literature analysis\cite{heldens2020landscape}}
+(2020,64cite)\par
+
+Two primary challenges are acknowledged by nearly all of the above studies: energy consumption and fault tolerance. For the energy challenge, US DARPA set 20MW as a reasonable power budget and most of the subsequent studies acknowledge this ambitious goal. For the fault tolerance challenge, all studies agree that handling hardware and software faults becomes increasingly more important as the scale of supercomputers continues to increase.
+
+Various other challenges are mentioned, many of which can be attributed to one of two classes: challenges due to an increase in complexity of software or challenges due to an increase in volume of data. 
+
+The first class addresses matters such as scientific applications, programming models, concurrency, heterogeneity, software sustainability, systems software, and software tools. Scalability needs to be incorporated across the entire software stack to create exascale-ready platforms. 
+
+The second class concerns the fact that exascale systems deal with massive amounts of data. This has a major impact on hardware (e.g., memory, storage, networks) as well as on software (e.g., data management, visualization, scientific discovery). Some challenges are on the intersection between the two classes, such as algorithms that can increase scalability by exploiting parallelism in the time-domain (i.e., increase software complexity) or reducing communication (i.e., decrease data movement).
+
+The authors describe exascale computing in eight areas: energy, fault tolerance, data storage, network interconnection, computer architecture, system software, parallel programming, and scientific computing
+
+
 %-------------------------------------------------------------------------
 \chapter{Memory model research}
 \section{Introcuction}
 \section{Multiprocessors}
 \subsection{Time, Clocks, and the Ordering of Events in a Distributed System\cite{lamport2019time}}
 (1978,14130cite)\par
-111
+This classic 1978 paper introduced the concept of logical clocks, which provided a foundation for the problem of event ordering and consistency in distributed systems. Although not directly about the memory model, it has important implications in understanding consistency in distributed systems.
+
+The notion of "happened before" defines an invariant partial ordering of events in a distributed multiprocess system. An algorithm for extending a partial sort to a somewhat arbitrary full sort is described, and it is shown how this full sort can be used to solve a simple synchronization problem.
+
+This idea is useful for understanding any multiprocess system. It helps people to understand the basic problem of multiprocessing independently of the mechanism used to solve the multiprocessing problem
 \subsection{How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs\cite{lamport1979make}}
 (1979,3726cite)\par
-111
+This 1979 paper introduced the "sequential consistency" model, one of the first memory consistency models, which provided the basis for the correct execution of concurrent programs on multiprocessor systems
+
+Many large sequential computers perform operations in an order different from the one specified by the program. A correct execution is achieved if the result produced is the same as that produced by executing the program steps sequentially. For multiprocessor computers, the correct execution of each processor does not guarantee the correct execution of the whole program. Additional conditions are given to ensure the correct execution of multiprocess programs.
+
+The authors illustrate how the logical property of sequential consistency can be preserved in a simple multiprocessor example (requests to different memory cells may be processed out of order, but sequential consistency is preserved).
 \subsection{Memory Access Buffering in Multiprocessors\cite{dubois1986memory}}
 (1986,745cite)\par
-111
+This 1986 paper studied the problem of memory access buffering in multiprocessor systems and proposed the far-reaching buffer coherence model
+\par
+In a multiprocessor architecture, it is important to keep the processor efficient due to the high cost of each processor. High processor utilization is guaranteed by stable, uninterrupted instructions and operands. Pipelining and buffering of memory accesses must be used in order to bridge the gap between slower shared memory and execution units with a very short cycle time
+\par
+Three different multiprocessor systems are studied from the perspective of memory access buffering. These structures represent the system architecture of shared-memory multiprocessors.
+1. Shared global Memory system: Multiprocessors with shared global memory and private local memory. All processors have access to the shared memory. Local memory is associated with a specific processor and does not contain any shared data
+2, Distributed global memory: The system has a multiprocessor with distributed global memory, which consists of an interconnection of local memories. Local memory contains global and private data and is randomly accessed (there are no multiple copies of the data)
+Cache-based systems: Multiprocessors with shared global memory and private caches. Shared memory contains code and data, and caches are accessed associatively
+A system is sequentially consistent if the result of any execution is the same as if the actions of all processors were executed in some order, and the actions of each processor appear in that sequence in the order specified by its program.
+\par
+A memory scheme is consistent if the value returned by a LOAD instruction is always the value given by the latest STORE instruction with the same address.
+\par
+Strong ordering in multiprocessor systems: (1) accesses to global data by a single processor are in order (2) if processor 2 observes that processor 1 is operating on global data, all accesses to global data must be performed on processor 2 before processor 1 terminates
+\par
+Weak ordering: (1) strong ordering is satisfied first (2) There is no access to synchronous variables in the processor until all previous global data accesses have been performed (3) The processor does not issue access to global data until previous accesses to synchronous variables have been performed
+\par
+In weakly ordered systems, processors can issue shared memory requests without having to wait for previous requests to be executed. This results in a very efficient system. In this case, the only troublesome access is to the synchronization variables. The buffer controller must still record the status of all cache accesses it issued but did not execute so that they can be executed each time an access to a synchronization variable is detected. The implementation of such a buffer can be very complex.
 \subsection{Foundations of the C++ Concurrency Memory Model\cite{boehm2008foundations}}
 (2008,625cite)\par
-111
+2008 discusses the basics of the C++ concurrent memory model, which provides theoretical support for understanding the memory model in modern programming languages
+\par
+A simple programming model is provided. To avoid data races, or equivalently, variables and other objects involved in data races are identified as atoms. They guarantee sequentially consistent execution.
+For those few users whose performance needs cannot be met by locking or sequentially consistent atomic operations, low-level, explicitly ordered atoms are provided, trading simplicity for cross-platform performance.
+(1) Sequentially consistent atoms: There is no data contention model, requiring all non-trivial data operations to be presented in a consistent order.
+(2)Trylock and impact on data race definition: Synchronization primitives like Trylock can be used in non-intuitive ways that previously required more complex data race definitions and/or overly strict isolation. A simple method is given to solve this problem.
+3.Semantics of data races: No semantics are provided for programs with data races.
+\par
+The authors argue that exclusive support for sequentially consistent atoms is not feasible in the normalization process for two main reasons:
+It is costly enough to implement on certain existing processors that an "expert-only" alternative for performance critical code was deemed necessary.
+Existing code is often written in a way that assumes weak memory ordering semantics and relies on the programmer to explicitly provide the required platform-specific hardware instructions to enforce the necessary ordering.
 \section{Memory model}
 \subsection{Memory Consistency Models\cite{mosberger1993memory}}
 (1993,451cite)\par
-111
+Sequential consistency guarantees that the result of any execution of n processors is the same, as if the actions of all processors are executed in some order, and the actions of each individual processor appear in this sequence in the order specified by the program.
+
+However, this model severely limits the set of possible optimizations. For example, in architectures with high latency memory, pipelined write accesses and the use of write buffers would be beneficial.
+
+None of these optimizations is possible in a strict sequential consistency model. Simulations show that weaker models that allow for this optimization can improve performance by 10\% to 40\% over strictly sequential models. However, weakening the memory consistency model goes hand in hand with changes to the programming model. In general, as the consistency model becomes weaker, the programming model becomes more restrictive (and complex).
+
+In short, weaker memory consistency models can have a positive impact on the performance of parallel shared-memory machines. As the memory latency increases, the benefits increase. In recent years, processor performance has grown significantly faster than memory system performance. In addition to this, memory latency increases with the number of processors in the system.
+\par
+In general, the more attributes a model distinguishes, the weaker the model will be. Some of the properties that the model can distinguish: how the access is made, the direction of the access (read, write, or both), the value passed in the access, the cause and effect of the access, the type of access
+\par
+Atomic consistency AC:
+The most restrictive of all consistency models. With atomic consistency, an operation takes effect at some point in the operation interval. For example, the clock period of the memory bus can be used as an operation interval. Multiple accesses are allowed in the same operation interval, which causes problems if the same location is read and written in the same operation interval.
+Atomic consistency is often used as a criterion when evaluating the performance of memory consistency models
+\par
+Sequential consistency SC:
+Lamport defined in 1979 that in a sequentially consistent system, all processors must agree on the order of the observed effects, as if the actions of all processors are executed in some order and the actions of each individual processor appear in this sequence in the order specified by its program.
+Sequential consistency has long been the canonical memory consistency model. However, many machines actually implement a slightly weaker model called processor coherence
+\par
+\par
+Causal consistency CC:
+Hutto and Ahamad introduced causal consistency. This concept can be applied to memory systems by interpreting writes as message sending events and reads as message reading events. A memory is causally consistent if all processors agree on the order of causally related events. Causally unrelated events (concurrent events) can be observed in different orders.
+CC is mainly of theoretical interest, as it is stricter and more difficult to implement than processor coherence
+\par
+\par
+Processor consistency PC and pipeline consistency PRAM:
+Lipton and Sandberg defined the PipelinedRAM (PRAM) consistency model, which is equivalent to the Processor consistency (PC) model proposed by Goodman.
+The motivation for this model is to allow pipelining of write access. Pipelined operations may delay the effect of writes. Thus, it relaxes some of the ordering constraints of write operations. Write operations of a single processor are still executed sequentially
+The difference between PC and SC is quite subtle and Goodman claims that most applications give the same results under both models. Processor consistent machines are easier to build than sequential consistent systems.
+\par
+Slow memory:
+A manifestation of the relative weakening of PC. It requires all processors to agree on the order of writes observed by a single processor for each location. In addition, local writes must be immediately visible.
+The model is named because writes propagate slowly through the system. Slow memory is probably one of the weakest uniform consistency models that can still be used for interprocess communication.
+The algorithm can only guarantee physical exclusion. Without a guarantee of logical exclusion, the knowledge that an access to one location has been performed cannot be used to infer that an access to another location has also been performed. Slow memory does not seem to make any practical sense.
+\par
+Weak consistency WC:
+A memory system is weakly consistent if it enforces the following restrictions:
+The synchronization variables are accessed in a consistent order. No access to synchronization variables is issued in the processor until all previous data accesses have been performed.
+The processor does not issue any accesses until previous accesses to synchronous variables have been executed, and while performing synchronous accesses, all previous accesses are guaranteed to have been executed, and all future accesses are guaranteed to be unexecuted.
+\par
+Release consistency RC:
+Before normal access to a shared variable can be made, all previous operations by the process that acquired the lock must have completed successfully. Prior read and write operations of the process must have completed before a lock operation can be released.
+Release consistency is concerned only with locked shared memory variables, and only requires that changes to the locked shared variable be notified to other processors.
+\par
+Enter conformance EC:
+Weaker than RC. However, it imposes more restrictions on the programming model. EC is similar to RC except that each shared variable needs to be associated with a synchronization variable
+This enables simultaneous access to different critical sections, which is not possible under RC.
+Another feature of EC is that it refines the acquisition access access into exclusive and non-exclusive. This again increases the potential for concurrency, since nonexclusive accesses to the same synchronization variable can be granted concurrently.
+
+This model is the first one specifically designed to implement software shared-memory systems.
 
 \renewcommand{\bibname}{Reference}
 \bibliographystyle{unsrt}

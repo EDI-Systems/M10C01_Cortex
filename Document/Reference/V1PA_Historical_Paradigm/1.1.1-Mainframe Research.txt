@@ -29,6 +29,37 @@
 大型机和超级计算机并不总是能清楚地区分开来;直到 1990 年代初，许多超级计算机都基于具有超级计算扩展的大型机架构
 
 
+Mainframe computers are the computers that large organizations use primarily for critical applications.
+Mainframe computers are large, but not as large as supercomputers, and have higher processing power than some other classes of computers.
+Most mainframe computer system architectures were built in the 1960s, but they continue to evolve. Mainframe computers are often used as servers.
+The term "mainframe" comes from the large cabinet, called mainframe, used to house the central processing unit and main memory of early computers.
+Later, the term mainframe was used to distinguish high-end commercial computers from less powerful machines.
+​
+Modern mainframe designs are characterized less by raw computing speed and more by:
+Redundant internal engineering to achieve high reliability and security
+Extensive IO facilities, capable of offloading to separate engines
+Strict backward compatibility with legacy software
+Enabling high hardware and compute utilization through virtualization to support massive throughput
+Hardware hotplugging, such as processors and memory
+The high stability and reliability of mainframes enables these machines to operate uninterrupted for long periods of time, with mean time between failures measured in decades.
+
+Characteristics of mainframes
+Modern mainframes can run multiple different instances of the operating system simultaneously. This virtual machine technology allows applications to run as if they were on physically different computers.
+Mainframes are designed to handle very large inputs and outputs (I/O) with an emphasis on throughput calculations.
+Since the late 1950s, mainframe designs have included accessory hardware (called channels or peripheral processors) to manage I/O devices, leaving the CPU only free to handle high-speed memory.
+Mainframes also have execution integrity features for fault-tolerant computation.
+For example, z900, z990, System z9, and System z10 servers can efficiently execute result-oriented instructions twice, compare the results, arbitrate between any differences (via instruction retry and fault isolation),
+The "dynamic" workload is then offloaded to a functioning processor, including spare parts, without any impact on the operating system, applications, or users.
+This hardware-level capability, also present in HP's NonStop system, is called lock-stepping because the two processors execute their "steps" -that is, instructions -together.
+Not all applications absolutely require the guaranteed integrity provided by these systems, but many do, such as financial transaction processing.
+​
+The difference from a supercomputer
+Supercomputers are computers at the cutting edge of data processing power, in terms of computational speed. Supercomputers are used to handle scientific and engineering problems with numbers and data (high performance computing), while mainframes focus on transaction processing.
+A transaction can refer to a set of operations, including disk reads/writes, operating system calls, or some form of data transfer from one subsystem to another, that are not measured by the processing speed of the CPU.
+Mainframes and supercomputers are not always clearly separated; Until the early 1990s, many supercomputers were based on mainframe architectures with supercomputing extensions
+
+
+
 						The mainframe is dead. Long live the mainframe!
 2013
 这篇文章涉及的技术细节不多，很大篇幅讨论了工业界和学术界的大型机课程和人才资源，但也介绍了大型机的业界情况
@@ -43,7 +74,17 @@
 解决方法之一是研究大型机和客户/服务器技术的集成，而不是在大型机以外的完全不同的计算机平台上用新语言重新设计和重写遗留代码。
 较新的大型机技术(如IBM的WebSphere)使大型机适应客户机/服务器和web环境，因此没有必要放弃大型机环境，因为大型机环境提供了一个稳定和安全的平台，允许组织实现其目标。
 
-
+This article is short on technical details.It discusses the mainframe curriculum and talent resources in industry and academia at large, but it also gives an overview of the mainframe industry
+​
+Large enterprise computing includes two main computing architectures.
+The first uses one or a few very large servers that provide batch processing and online transaction processing to hundreds or thousands of clients. These servers were historically referred to as mainframes
+The second and most recent architecture is to cluster many commodity servers in parallel and have them process transactions for hundreds or thousands of clients in a distributed fashion.
+​
+Over the past few years, clusters have been touted as the logical successor to the mainframe for reasons of economics, scalability, and failover capabilities, and IBM has seen increasing sales of mainframe hardware and software.
+​
+The authors believe that there will be greater demand for people with knowledge of mainframes, large enterprise languages, databases and systems, and integration knowledge.
+One solution is to investigate the integration of mainframe and client/server technologies, rather than redesign and rewrite legacy code in a new language on a completely different computer platform outside the mainframe.
+Newer mainframe technologies, such as IBM's WebSphere, adapt the mainframe to client/server and web environments, so there is no need to abandon the mainframe environment, which provides a stable and secure platform that allows organizations to achieve their goals.
 						Using Hadoop on the Mainframe:A Big Solution for the Challenges of Big Data 
 
 2015，6cite
@@ -74,6 +115,34 @@ ETL问题
 
 作者认为，在大型机上使用hadoop来分析数据，可以显著降低分析计算的成本，并通过避免在源(大型机)平台之外创建不必要的数据副本，大大提高遵从性
 
+In the era of cloud computing and "big data," the authors illustrate that the mainframe is still a valuable architecture. The authors argue that mainframes offer advantages over other solutions in processing large amounts of data
+​
+The authors first discuss the framing of data, industry estimates that 20% of the world's data is "structured", or exists in some form of tabular form, but 80% of the data is "semi-structured" - social media, call centre data, text files, sensor data, etc.
+Not only does this present a challenge in volume and speed, but some method must be used to gather some meaning from a large amount of data that is independent of the formal schema that provides an indication of the meaning of the data. This ultimately leads to the need for improved analysis.
+​
+The first challenge is to conceptually classify big data to make this task more manageable. The first logical step is to separate "sensitive, structured" data from "semi-public, semi-structured" data.
+The first category includes customer information, business transactions, etc., which typically reside in relational tables.
+The latter category includes call center data, declaration data, text files, data in XML format, social media data, and so on.
+The challenge with data in multiple formats (as mentioned above with multiple formats) is that you have to take the data from where it is, convert it to the format you want, and load it to where you want to use it.
+​
+ETL Issues
+Extracting, Transforming, and loading (ETL) data from different systems may seem irrelevant. However, the considerable cost of ETL must be taken into account.
+1) Additional servers, storage, and network equipment needed to support file transfer and process data
+2) Manage the man-hours involved in file transfer and related data
+3) Offloading costs associated with wasted system cycles (system misuse)
+​
+​
+Why use hadoop on mainframes?
+Licensing costs for mainframe software can be minimized by implementing hadoop, an open source solution. This can affect the support and maintenance costs of the business.
+Modernizing workflows to big data open source environments expands the scope of future workflow updates, makes it easy to build systems that adapt to new technologies, and thus broadizes development methods
+​
+Mainframes are capable of creating virtual Linux servers. These servers can run most of the available open source products, being able to put a Linux cluster running hadoop on the same host that contains large data stores in various proprietary formats.
+They can be created, moved, and removed with relative ease and with little disruption to the physical footprint of the infrastructure. As a result, if you are developing processes (i.e., applications) that can perform ETL internally, you can eliminate much of the complexity and cost of mainframe to non-mainframe ETL.
+The "use on demand" nature of the mainframe allows scaling up and down with minimal disruption to the existing infrastructure and minimal impact on the physical footprint of the infrastructure. For example, we can double or triple the number of available clusters by issuing a few commands without disrupting the network
+​
+The authors argue that using hadoop on mainframes to analyze data can significantly reduce the cost of analytical computations and greatly improve compliance by avoiding the creation of unnecessary copies of data outside the source (mainframe) platform
+
+
 						The data center evolution from Mainframe to Cloud
 2016，5cite
 云计算并没有扼杀大型机。虽然云计算具备颠覆性的技术，然而，它导致了大型机的进化。
@@ -87,7 +156,16 @@ ETL问题
 大型机市场依然强劲的原因有两个方面。一种是锁定——在大型机上运行的旧的业务关键型应用程序，其中内置了多年的业务逻辑，迁移到其他地方需要花费大量资金。
 另一个是大型机在现代混合云架构中的相关性。多年来，主机已经发展了很多，可以在大型机上运行Linux。这些大型提供商正在做的很多事情实际上是试图通过将许多服务器散列在一起来重新创建大型机。
 						
-
+Cloud computing did not kill the mainframe. While cloud computing is a disruptive technology, it has led to the evolution of mainframes.
+The big advantage of a mainframe now is that you already have one. If you do not already own one, there is little reason to invest in one, as cloud computing provides solutions that are generally more cost effective in almost all cases.
+One of the benefits of a mainframe is that you have 100% complete control over your own data. When using cloud services, third-party companies may have access to your data. With mainframes, you don't need to worry about them snooping or touching user data. In practice, of course, it's highly unlikely that most large cloud computing companies are trustworthy.
+However, if you already have one, there are definitely reasons to keep it. The cost of shifting hundreds of thousands of lines of code can outweigh the benefits of switching to cloud computing.
+Compared to cloud services, mainframes have greater customization and specialization capabilities because the hardware itself is controlled by the user. Mainframe computers reduce the bandwidth used and can be used even when the Internet is off
+​
+One of the problems with cloud computing is that it relies on a fairly strong Internet connection, and hopefully this connection will never go down, or it will go down as little as possible, in order to justify the cost imposed by a broken connection. But this should be a rare problem, as most businesses today stay well connected.
+​
+The reason the mainframe market remains strong is twofold. One is lock-in - old business-critical applications running on mainframes with years of business logic built into them that cost a lot of money to migrate elsewhere.
+Another is the relevance of mainframes in modern hybrid cloud architectures. Mainframes have evolved a lot over the years to run Linux on mainframes. A lot of what these large providers are doing is actually trying to recreate the mainframe by hashing many servers together.
 
 
 
@@ -99,12 +177,25 @@ ETL问题
 元 计算机发展的下一个阶段超越了异构计算机网络的软件集成。第二阶段涉及将单个应用程序扩展到多台计算机上，允许中心的异构计算机集合协同工作以解决单个问题。这使用户能够尝试没有元计算机几乎不可能实现的各种计算。允许以一般方式完成此操作的软件(与一次性、临时解决方案相反)刚刚出现，并且随着用户开始使用它，正在进行评估和改进。
 元计算机发展的第三阶段将是一个透明的国家网络，它将极大地增加应用程序可用的计算和信息资源。这个阶段涉及的不仅仅是让本地元计算机使用远程资源(即，改变组件之间的距离)。第三阶段包括建立适当的WAN基础设施和开发管理、文件系统和安全方面的标准。
 作者以NCSA的元计算机作为第一阶段的范例，以SIGGRAPH在92年的文献作为第二阶段开始的范例，在理论模拟，分子虚拟现实等方面展示了元计算的部分成果
+
+The first phase of building the meta-computer is mainly the integration work of software and hardware, which includes interconnecting all resources with high performance networks, implementing distributed file systems, and coordinating user access across systems
+The next stage in the evolution of the metacomputer goes beyond the software integration of heterogeneous computer networks. The second phase involves scaling a single application onto multiple computers, allowing a central collection of heterogeneous computers to work together to solve a single problem. This enables users to attempt a variety of computations that would be nearly impossible without the meta-computer. Software that allows this to be done in a general way, as opposed to one-off, AD hoc solutions, has just emerged and is being evaluated and improved as users begin to use it.
+The third stage in the development of the meta-computer will be a transparent national network that will dramatically increase the computational and information resources available to applications. This phase involves more than just making remote resources available to the local metacomputer (that is, changing the distance between components). The third phase consists of setting up an appropriate WAN infrastructure and developing standards in management, file systems, and security.
+The authors take NCSA's metasystem as an example in the first stage and SIGGRAPH's paper in 1992 as an example in the beginning of the second stage, and show some achievements of metasystem in theoretical simulation, molecular virtual reality and so on
+
 						The Grid: A New Infrastructure for 21st Century Science
 1998，5774cite
 衡量技术变革速度的一个有用指标是，速度或容量翻番或价格减半的平均时间。对于存储、网络和计算能力，这些周期分别为12个月、9个月和18个月左右。
 在这篇文章中，作者认为计算机速度每18个月翻一番的速度无法跟上增长更快的存储和传输，探讨了"网格计算"这一概念
 作者提到，身份验证、授权和策略是网格中最具挑战性的问题。传统的安全技术主要关注保护客户机和服务器之间的交互，而在网格环境中，情况更为复杂，客户机和服务器之间的区别趋于消失
 单点登录(用户应该能够进行一次身份验证，然后为计算分配操作的权利)，映射到本地安全机制(不同的站点可能使用不同的本地安全解决方案,网格安全基础设施需要映射到每个站点上的这些本地解决方案)，代理凭证(必须仔细管理这些委托操作和启用它们的授权证书)，社区授权和策略(每个资源都要跟踪社区成员和特权是不可行的,需要能够根据其他标准来表达策略)
+
+A useful measure of the speed of technological change is the average time it takes for speed or capacity to double or for prices to halve. These periods are around 12, 9 and 18 months for storage, network and computing power, respectively.
+In this article, the author discusses the concept of "grid computing", arguing that the doubling of computer speeds every 18 months cannot keep up with the faster growth of storage and transfer
+The authors mentioned that authentication, authorization, and policies are the most challenging issues in the grid. Traditional security techniques mainly focus on protecting the interaction between client and server, while in grid environment, the situation is more complex and the distinction between client and server tends to disappear
+Single sign-on (users should be able to authenticate once and then assign rights to operations for computation), map to local security mechanisms (different sites may use different local security solutions, and grid security infrastructure needs to map to these local solutions on each site), Proxy credentials (these delegated actions and the authorization certificates that enable them must be carefully managed), community authorizations and policies (it is not feasible for every resource to keep track of community membership and privileges, and it is necessary to be able to express policies based on other criteria)
+
+
 						A Resource Management Architecture for Metacomputing Systems
 1998,929cite
 元计算系统旨在支持远程和/或并发使用地理上分布的计算资源。元计算系统允许应用程序根据需要组装和使用计算资源集合，而不考虑物理位置。
@@ -125,6 +216,27 @@ ETL问题
 资源代理负责获取高级RSL规范，并通过作者称为专门化的过程将其转换为更具体的规范
 这样的地面请求可以传递给共同分配器，该分配器负责协调多个站点的资源分配和管理
 资源共同分配器将多请求分解为其组成元素，并将每个组件传递给适当的资源管理器
+
+
+Meta-computing systems are designed to support remote and/or concurrent use of geographically distributed computing resources. Metacomputing systems allow applications to assemble and use collections of computing resources as needed, regardless of physical location.
+The metacomput environment introduces five challenging resource management issues: site autonomy, heterogeneous foundation, policy scalability, co-allocation, and online control
+The authors describe a resource management architecture that addresses these issues. The architecture distributes the resource management problem among different local managers, resource brokers, and resource common allocator components, and defines an extensible resource specification language to exchange information about requirements.
+​
+The site autonomy problem refers to the fact that resources are usually owned and operated by different organizations in different administrative domains.
+The heterogeneous substrate problem originates from the site autonomy problem, which means that different sites may use different local resource management systems.
+Policy scalability issues arise because metacomputer applications come from a wide range of domains, each with its own requirements;
+The co-allocation problem arises because the resource requirements of many applications can only be met by using resources simultaneously at several sites. Site autonomy and the possibility of failures during the allocation process lead to the need for specialized mechanisms to allocate multiple resources.
+Online control problems arise because a lot of negotiation may be required to adapt application requirements to resource availability, especially when requirements and resource characteristics change during execution;
+​
+Prior work on resource management in metacomputer systems can be divided into two broad categories:
+Network batch queuing system. These systems strictly focus on the problem of resource management for a group of networked computers. Batch scheduling systems provide a limited form of policy scalability
+Wide area scheduling system. Here, resource management is performed as a component that maps application components to resources and schedules their execution. So far, these systems do not address the issues of heterogeneous substrates, site autonomy, and co-allocation.
+​
+This paper defines a resource specification language (RSL) to communicate resource requests between components, and constructs a multi-tier resource architecture (from application to resource broker, to resource co-allocator and resource manager).
+The resource agent is responsible for taking the high-level RSL specification and transforming it into a more specific specification through a process the authors call specialization
+Such ground requests can be passed to the common allocator, which coordinates resource allocation and management across multiple sites
+The resource co-allocator decomposes multiple requests into their constituent elements and passes each component to the appropriate resource manager
+
    						The Harness Metacomputing Framework
 1999,45cite
 Harness是一个实验性的元计算框架，它基于动态可重构的原则，不仅针对组成虚拟机的计算机和网络，而且还针对虚拟机本身的功能。Harness的这个基本特性旨在解决当前元计算框架的不灵活性，以及它们无法合并新技术和避免快速过时的问题
@@ -140,6 +252,20 @@ Harness元计算框架中的基本抽象是分布式虚拟机(DVM)，用户可�
 	Legion是一个元计算系统，可以容纳地理上分布的高性能机器和工作站的异构组合。Legion是一个面向对象的系统，其重点是提供对企业级分布式计算框架的透明访问。因此，它并不试图迎合不断变化的需求，并且在它所支持的计算模型类型和实现中都是相对静态的。
 	Globus是建立在“Nexus”通信框架之上的元计算基础设施。Globus系统是围绕工具包的概念设计的，该工具包由与通信、资源分配、数据等相关的预定义模块组成。然而，这些模块的组装不应该像在Harness中那样在运行时动态地发生。
 几乎所有上述项目都设想了一个模型，在这个模型中，非常高性能的模块被静态地连接起来，以构建一个更大的系统。Harness项目的主要思想之一是通过动态连接、断开连接和重新配置异构组件来交换一些效率，以获得增强的全局可用性、可升级性和故障恢复能力。
+
+Harness is an experimental meta-computing framework that is based on the principle of dynamic reconfiguration, not only for the computers and networks that compose a virtual machine, but also for the functionality of the virtual machine itself. This fundamental feature of Harness aims to address the inflexibility of current metacomponent frameworks and their inability to incorporate new technologies and avoid rapid obsolescence
+Distributed and cluster computing technologies often change with new machine capabilities, interconnection network types, protocols, and application requirements, and the underlying middleware either needs to be changed or rebuilt, increasing the amount of effort involved and hindering interoperability.
+​
+This framework supports reconfiguring the computers and networks that make up the virtual machine, as well as reconfiguring the functionality of the virtual machine itself. These characteristics can be modified under user control through a "plug-in" mechanism that serves as a central feature of the system, providing a virtual machine environment that can be dynamically adapted to meet application requirements
+The basic abstraction in the Harness meta-computing framework is the Distributed Virtual Machine (DVM). Users can configure, join or leave the DVM by means of plug-ins
+​
+​
+Related work:
+PVM is one of the first systems to propose the concept of meta-computing in concrete virtual machine and programming environment terms and to explore heterogeneous network computing. PVM is based on the concept of a dynamic, user-specified pool of hosts on which software simulates generic concurrent computing resources.
+Dynamic process management combined with strongly typed heterogeneous message passing in PVM provides an efficient environment for distributed memory parallel programs. However, PVM lacks flexibility in a number of ways, which may limit the development of the next generation of meta-computing and collaborative applications. For example, multiple DVM merging and splitting is not supported. Two different users cannot interact, collaborate, and share resources and programs in an active PVM machine. PVM uses Internet protocols, which may preclude the use of specialized network hardware
+Legion is a meta-computing system that can accommodate a heterogeneous combination of geographically distributed high performance machines and workstations. Legion is an object-oriented system with a focus on providing transparent access to enterprise-class distributed computing frameworks. As such, it does not attempt to cater to changing requirements and is relatively static in both the types of computational models and implementations it supports.
+Globus is a meta-computing infrastructure built on top of the "Nexus" communication framework. The Globus system is designed around the concept of a toolkit consisting of predefined modules related to communication, resource allocation, data, etc. However, the assembly of these modules should not happen dynamically at runtime as in Harness.
+Almost all of the above projects envisage a model in which very high performance modules are statically connected to build a larger system. One of the main ideas of the Harness project is to trade some efficiency by dynamically connecting, disconnecting, and reconfiguring heterogeneous components for enhanced global availability, upgradability, and failure resilience.
 
 
 todo：自动切割程序分割到分布式平台
@@ -169,6 +295,29 @@ reduce worker遍历已排序的中间数据，对于遇到的每个唯一的中�
 自定义输入和输出类型，用于读取新的输入格式和产生新的输出格式
 在一台机器上执行的模式，以简化调试和小规模测试。
 
+This is an effort by Google, MapReduce is a programming model and associative implementation for processing and generating large-scale datasets. The user defines the Map function to process the input data and generate a set of intermediate key-value pairs, and then defines the Reduce function to process these intermediate key-value pairs.
+MapReduce automatically handles data partitioning, distribution, and failure recovery, allowing programs to run efficiently in distributed systems.
+​
+The authors design a new abstraction that allows the user to express the simple computation that is trying to be performed, but hides the messy details of parallelization, fault tolerance, data distribution, and load balancing in the library.
+The authors explain that most computations involve applying a map operation to each logical record in the input to compute a set of intermediate key-value pairs, and then applying a reduce operation to all values sharing the same key in order to properly combine the derived data. Using a functional model with user-specified map and reduce operations enables easy parallelization of large computations and uses reexecution as the primary mechanism for fault tolerance.
+The main contribution of this work is a simple yet powerful interface that enables automatic parallelization and distribution of large-scale computations, combined with the implementation of this interface to achieve high performance on large commodity pc clusters. The programming model can also be used to parallelize computations among multiple cores on the same machine.
+​
+The MapReduce library in the user program starts by splitting the input file into M chunks, each of which is typically 16-64MB in size (controlled by the user via optional parameters). It then launches many copies of the program on a set of machines.
+One copy of the program, master, is special. The rest is for the master to assign the work. There are M map tasks and R reduce tasks to allocate.
+The worker thread assigned the mapping task reads the contents of the corresponding input split. It parses key-value pairs from the input data and passes each pair to a user-defined map function, which produces intermediate key-value pairs that are buffered in memory.
+The buffer pairs are periodically written to the local disk and divided into R regions by the partitioning function. The locations of these buffer pairs on the local disk are passed back to the master server, which is responsible for forwarding these locations to the reduce worker
+When the master informs the reduce worker about these locations, it reads the buffered data from the map worker's local disk using a remote procedure call. When the reduce worker has read all the intermediate data for its partition, it sorts the data by the intermediate key in order to group together all the occurrences of the same key
+The reduce worker iterates over the sorted intermediate data, and for each unique intermediate key it encounters, it passes the key and the corresponding set of intermediate values to the user's reduce function. The output of the reduce function is appended to the final output file of this reduce partition
+The main program wakes up the user program. At this point, the MapReduce call in the user program returns to the user code
+​
+Extending functionality
+User-specified partitioning function to determine the mapping of intermediate keys to R reduce shards
+Ordering guarantee: Our implementation guarantees that in each R reduce partition, intermediate key/value pairs are processed in increasing key order
+User-specified composition function to partially combine intermediate values generated using the same key in the same map task (to reduce the amount of intermediate data that must be transferred over the network)
+Custom input and output types for reading new input formats and producing new output formats
+Mode of execution on a single machine to simplify debugging and small-scale testing.
+
+
 						Apache Hadoop YARN: Yet Another Resource Negotiator
 2013，2844cite
 Apache Hadoop最初是MapReduce的众多开源实现之一。开发人员为了充分利用物理资源，经常采用巧妙的变通方法来避开MapReduce API的限制。
@@ -186,6 +335,20 @@ ApplicationMaster (AM)通过从RM请求资源、从它接收到的资源生成�
 Applicatio nMaster是作业的“头”，管理所有生命周期方面，包括动态增加和减少资源消耗，管理执行流(例如，根据映射的输出运行reducer)，处理故障和计算倾斜，以及执行其他局部优化。实际上，AM可以运行任意用户代码，并且可以用任何编程语言编写，因为与RM和NM的所有通信都是使用可扩展通信协议进行编码的
 为了获取容器，AM向RM发出资源请求。当代表AM分配资源时，RM为该资源生成一个租约，该租约由后续的AM心跳提取。当AM向NM提交容器租约时，基于令牌的安全机制保证其真实性
 
+Apache Hadoop was originally one of many open source implementations of MapReduce. Developers often work around the limitations of the MapReduce API by using clever works to get the most out of their physical resources.
+These limitations and misuses have inspired an entire class of papers that use Hadoop as a benchmark for unrelated environments. By now, the limitations of the original Hadoop architecture are well understood by both academic and open source communities
+​
+The authors introduce YARN, a next-generation Hadoop computing platform that, unlike the familiar monolithic architecture, delegates many scheduling-related functions to each job component by separating resource management functions from the programming model. In this new context, MapReduce is just one of the applications running on top of YARN. This separation provides a great deal of flexibility in the choice of programming framework
+​
+YARN is composed of a resource manager, a node manager, an application manager, and containers. The resource manager allocates resources, the node manager processes nodes and monitors their resource usage, and the container contains a collection of physical resources
+The ResourceManager (RM) of each cluster tracks resource usage and node activity, enacts allocation invariants, and arbitrates contention among tenants. Running as a daemon on a dedicated machine, it acts as a resource arbitration center between the various competing applications in the cluster. It can enforce properties such as fairness, capacity, and locality across tenants. The RM dynamically assigns leases, called containers, to specific nodes based on application requirements, scheduling priorities, and resource availability
+​
+The ApplicationMaster (AM) coordinates the logical plan of a single job by requesting resources from the RM, generating a physical plan from the resources it receives, and coordinating the execution of this plan around failures.
+To execute and track these allocations, the RM interacts with a special system daemon called NodeManager (NM) running on each node. The communication between RM and NMs is heartbeat-based to achieve scalability. The NMs is responsible for monitoring resource availability, reporting failures, and container lifecycle management.
+​
+When a certain job is generated, the job is submitted to the RM through a common submission protocol and goes through an admission control phase where security credentials are verified and various operational and administrative checks are performed. Accepted jobs are passed to the scheduler to be run. Once the scheduler has enough resources, the application moves from accepting to running state. Allocate a container for AM and generate it on a node in the cluster. Records of accepted applications are written to persistent storage and recovered upon RM restarts or failures.
+Applicatio nMaster is the "head" of the job and manages all lifecycle aspects, including dynamically increasing and decreasing resource consumption, managing execution flow (e.g., running reducers based on mapped outputs), handling failures and computation skew, and performing other local optimizations. Indeed, AM can run arbitrary user code and can be written in any programming language, since all communications with RM and NM are encoded using extensible communication protocols
+To acquire the container, AM makes a resource request to RM. When allocating a resource on behalf of an AM, the RM generates a lease for that resource, which is extracted by subsequent AM heartbeats. When AM submits a container lease to NM, the token-based security mechanism guarantees its authenticity
 
 						Bigtable: A Distributed Storage System for Structured Data
 @article{chang2008bigtable,
